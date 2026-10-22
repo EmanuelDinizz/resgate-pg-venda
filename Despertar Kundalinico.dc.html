@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#08130F; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#E7A79B; }
+  a:hover { color:#F3C2B8; }
+  @keyframes dkIn { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:none } }
+  @keyframes dkKen { from { transform:scale(1.07) } to { transform:scale(1) } }
+  @keyframes dkGlow { 0%,100% { opacity:.55 } 50% { opacity:1 } }
+  [data-hero-img] { animation: dkKen 2.8s ease-out both; }
+  [data-h] { opacity:0; animation: dkIn .85s cubic-bezier(.22,.8,.3,1) forwards; }
+  [data-h="1"]{animation-delay:.06s} [data-h="2"]{animation-delay:.18s} [data-h="3"]{animation-delay:.30s} [data-h="4"]{animation-delay:.44s}
+  [data-rv] { opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.22,.8,.3,1), transform .8s cubic-bezier(.22,.8,.3,1); }
+  [data-rv].dk-in { opacity:1; transform:none; }
+  [data-stag] > * { opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.22,.8,.3,1), transform .7s cubic-bezier(.22,.8,.3,1); }
+  [data-stag].dk-in > * { opacity:1; transform:none; }
+  [data-stag].dk-in > *:nth-child(2){transition-delay:.1s} [data-stag].dk-in > *:nth-child(3){transition-delay:.2s}
+  [data-stag].dk-in > *:nth-child(4){transition-delay:.3s} [data-stag].dk-in > *:nth-child(5){transition-delay:.4s} [data-stag].dk-in > *:nth-child(6){transition-delay:.5s}
+  .dk-cta { transition: transform .2s ease, box-shadow .3s ease, filter .3s ease; }
+  .dk-cta:hover { filter:brightness(1.06); box-shadow:0 14px 40px rgba(231,167,155,.45) !important; }
+  .dk-cta:active { transform:scale(.985); }
+  @media (max-width:1080px) {
+    [data-hero-inner] { grid-template-columns:1fr !important; }
+    [data-hero-inner] > div:nth-child(2) { justify-self:start !important; }
+    [data-ticket-grid] { grid-template-columns:1fr 1fr !important; gap:16px !important; }
+    [data-ticket-grid] > div:nth-child(3) { grid-column:1 / -1; text-align:left !important; }
+  }
+  @media (max-width:860px) {
+    [data-2col] { grid-template-columns:1fr !important; }
+    [data-4col] { grid-template-columns:1fr !important; }
+    [data-3col] { grid-template-columns:1fr !important; }
+    [data-hero-desk] { display:none !important; } [data-hero-mob] { display:block !important; }
+    [data-hero-scrim] { background:linear-gradient(180deg, rgba(8,19,15,.25) 0%, rgba(8,19,15,.45) 30%, rgba(8,19,15,.88) 58%, #08130F 82%) !important; }
+    [data-hero-inner] { padding-top:240px !important; }
+    [data-nav-date] { display:none !important; }
+    [data-bio-photo] { order:-1; max-width:300px !important; justify-self:center; }
+    [data-ticket-grid] { grid-template-columns:1fr 1fr !important; gap:16px !important; }
+    [data-ticket-grid] > div:nth-child(3) { grid-column:1 / -1; text-align:left !important; }
+    [data-sticky] { display:block !important; }
+    [data-last] { padding-bottom:96px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-h],[data-rv],[data-stag] > * { opacity:1 !important; transform:none !important; animation:none !important; transition:none !important; }
+    [data-hero-img] { animation:none !important; }
+  }
+</style>
+</helmet>
+<div style="position:relative; background:#08130F; color:#F1EADF; font-family:'Jost',system-ui,sans-serif; overflow-x:hidden;">
+
+  <!-- ============ FAIXA TOPO ============ -->
+  <div style="background:linear-gradient(90deg,#164536,#2E7D64 50%,#164536); border-bottom:1px solid rgba(216,183,122,.35);">
+    <div style="max-width:1200px; margin:0 auto; padding:9px 20px; text-align:center; font-family:'Jost',sans-serif; font-weight:500; font-size:clamp(10px,2.5vw,12px); letter-spacing:.2em; color:#F6EEE3;">IMERSÃO AO VIVO · DOIS DIAS · R$ 35</div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <div style="position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); background:rgba(8,19,15,.8); border-bottom:1px solid rgba(216,183,122,.16);">
+    <div style="max-width:1200px; margin:0 auto; padding:13px 22px; display:flex; align-items:center; justify-content:space-between; gap:18px;">
+      <div style="display:flex; flex-direction:column; line-height:1;">
+        <span style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:clamp(15px,3.6vw,18px); letter-spacing:.04em; color:#F6EEE3;">Resgate de Fractais</span>
+        <span style="font-family:'Jost',sans-serif; font-size:9.5px; letter-spacing:.3em; color:#D8B77A; margin-top:5px;">DESPERTAR KUNDALÍNICO</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:18px;">
+        <span data-nav-date="1" style="font-family:'Jost',sans-serif; font-size:11px; letter-spacing:.16em; color:rgba(241,234,223,.65);">{{ navDate }}</span>
+        <a href="{{ checkoutUrl }}" class="dk-cta" style="display:inline-flex; align-items:center; padding:11px 20px; border-radius:999px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-family:'Jost',sans-serif; font-weight:600; font-size:11px; letter-spacing:.12em; text-decoration:none;">GARANTIR VAGA</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section id="topo" data-screen-label="Hero" style="position:relative; overflow:hidden;">
+    <div data-hero-img="1" data-hero-desk="1" aria-hidden="true" style="position:absolute; inset:0; background-image:url('./assets/hero-desktop.webp'); background-size:cover; background-position:70% center;"></div>
+    <div data-hero-img="1" data-hero-mob="1" aria-hidden="true" style="display:none; position:absolute; inset:0; background-image:url('./assets/hero-mobile.webp'); background-size:cover; background-position:center top;"></div>
+    <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(135deg,#1E6B54,#164536 55%,#3A1E22); mix-blend-mode:color; opacity:.42;"></div>
+    <div aria-hidden="true" style="position:absolute; inset:0; background:radial-gradient(520px 420px at 74% 40%, rgba(231,167,155,.28), transparent 70%); mix-blend-mode:screen; animation:dkGlow 7s ease-in-out infinite;"></div>
+    <div data-hero-scrim="1" aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(8,19,15,.97) 0%, rgba(8,19,15,.9) 38%, rgba(8,19,15,.55) 62%, rgba(8,19,15,.18) 100%);"></div>
+    <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:160px; background:linear-gradient(180deg, transparent, #08130F);"></div>
+
+    <div data-hero-inner="1" data-2col="1" style="position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 22px clamp(72px,9vw,110px); display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(36px,5vw,64px); align-items:center;">
+      <div>
+        <div data-h="1" style="display:inline-flex; align-items:center; gap:12px; margin-bottom:clamp(20px,3.4vw,28px);">
+          <span aria-hidden="true" style="width:28px; height:1px; background:#D8B77A;"></span>
+          <span style="font-family:'Jost',sans-serif; font-weight:500; font-size:11px; letter-spacing:.24em; color:#D8B77A;">IMERSÃO RESGATE DE FRACTAIS | DESPERTAR KUNDALÍNICO</span>
+        </div>
+        <h1 data-h="2" style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(29px,3.6vw,48px); line-height:1.12; letter-spacing:-.01em; margin:0 0 clamp(22px,3.4vw,30px); color:#F6EEE3; text-wrap:pretty;">Em dois dias você vai cortar os cordões invisíveis que drenam sua energia, desenvolver sua Kundalini e atrair <em style="font-style:italic; color:#E7A79B;">confiança, alegria, conexão espiritual e abundância</em> para seu Campo Vibracional</h1>
+        <p data-h="3" style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.62; color:rgba(241,234,223,.8); margin:0; max-width:52ch;">Você sente que tem um problema invisível, e que por mais que tenha buscado ajuda, ninguém conseguiu te ajudar de verdade?</p>
+      </div>
+
+      <!-- TICKET HERO -->
+      <div data-h="4" style="width:100%; max-width:430px; justify-self:end; filter:drop-shadow(0 28px 48px rgba(0,0,0,.6));">
+        <div style="border-radius:14px 14px 0 0; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); mask-composite:intersect;">
+          <div style="background:linear-gradient(100deg,#2E7D64,#1E5A47 60%,#164536); padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:14px;">
+            <span style="font-family:'Jost',sans-serif; font-weight:600; font-size:11px; letter-spacing:.2em; color:#F6EEE3;">INGRESSO · IMERSÃO</span>
+            <span style="font-family:'Jost',sans-serif; font-weight:500; font-size:11px; letter-spacing:.16em; color:rgba(246,238,227,.65);">RDF-DK</span>
+          </div>
+          <div style="background:#F6EEE3; padding:24px 24px 22px;">
+            <div data-ticket-grid="1" style="display:grid; grid-template-columns:auto auto 1fr; gap:10px 18px; align-items:start;">
+              <div>
+                <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#A8874C; margin-bottom:7px; white-space:nowrap;">DATA</div>
+                <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#1B2420; white-space:nowrap;">{{ eventDate }}</div>
+              </div>
+              <div>
+                <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#A8874C; margin-bottom:7px; white-space:nowrap;">DURAÇÃO</div>
+                <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#1B2420; white-space:nowrap;">2 dias</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#A8874C; margin-bottom:7px; white-space:nowrap;">FORMATO</div>
+                <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#1B2420; white-space:nowrap;">Online, ao vivo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="border-radius:0 0 14px 14px; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); mask-composite:intersect;">
+          <div style="background:#F6EEE3; padding:0 24px;"><div style="border-top:2px dashed rgba(168,135,76,.5);"></div></div>
+          <div style="background:#F6EEE3; padding:22px 24px 24px; text-align:center;">
+            <div style="font-size:12px; font-weight:500; letter-spacing:.18em; color:#2E7D64; margin-bottom:8px;">VALOR SIMBÓLICO</div>
+            <div style="display:flex; align-items:baseline; justify-content:center; gap:6px;">
+              <span style="font-family:'Bodoni Moda',serif; font-size:30px; color:#1B2420;">R$</span>
+              <span style="font-family:'Bodoni Moda',serif; font-weight:700; font-size:72px; line-height:.9; color:#1B2420;">35</span>
+            </div>
+            <div style="font-size:14px; font-weight:300; color:rgba(27,36,32,.6); margin-top:10px;">imersão + 3 bônus inclusos</div>
+          </div>
+          <div style="background:#EBDFCF; padding:18px 24px 22px;">
+            <a href="{{ checkoutUrl }}" class="dk-cta" style="display:flex; align-items:center; justify-content:center; gap:11px; padding:18px; border-radius:8px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-family:'Jost',sans-serif; font-weight:600; font-size:14px; letter-spacing:.1em; text-decoration:none; box-shadow:0 10px 26px rgba(201,123,112,.35);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>GARANTIR MINHA VAGA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O PROBLEMA ============ -->
+  <section data-screen-label="Problema" style="border-top:1px solid rgba(216,183,122,.12);">
+    <div style="max-width:720px; margin:0 auto; padding:clamp(68px,10vw,110px) 22px;">
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:clamp(18px,3vw,24px);">
+        <p style="font-family:'Bodoni Moda',serif; font-size:clamp(21px,4.8vw,28px); line-height:1.42; color:#F6EEE3; margin:0;">É como se você estivesse girando em círculos, sem encontrar o que sua alma busca.</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.8); margin:0;">Como se, mesmo quando o dinheiro chega, fosse algo passageiro — e a angústia voltasse. Como se não existisse uma parceria que realmente te entendesse. Como se ser você, ser mulher, fosse errado.</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.8); margin:0;">Se isso ecoou dentro de você, continue lendo. Porque o que eu vou te contar explica por que nada funcionou até hoje — e o que finalmente quebra esse ciclo.</p>
+      </div>
+      <div data-rv="1" style="margin-top:clamp(34px,5vw,48px); padding:clamp(24px,4vw,34px); border-radius:12px; background:linear-gradient(160deg, rgba(46,125,100,.18), rgba(13,31,25,.6)); border:1px solid rgba(46,125,100,.4);">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.22em; color:#D8B77A; margin-bottom:12px;">ORGANIZAÇÃO MUNDIAL DA SAÚDE</div>
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.66; color:rgba(241,234,223,.86); margin:0;">Você sabia que o esgotamento já foi reconhecido pela Organização Mundial da Saúde como um fenômeno ocupacional real? Não é frescura. Não é drama. É uma condição que hoje atinge em cheio quem mais dá de si: a mulher que trabalha, cuida, performa, segura tudo — e vai se apagando em silêncio, sem entender por quê.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O MITO (SEÇÃO CLARA) ============ -->
+  <section data-screen-label="Mito de Psiquê" style="background:linear-gradient(170deg,#F6EEE3 0%,#F1DFD6 100%); color:#1B2420;">
+    <div style="max-width:760px; margin:0 auto; padding:clamp(72px,10vw,116px) 22px;">
+      <div data-rv="1" style="text-align:center; margin-bottom:clamp(34px,5vw,48px);">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#A8874C; margin-bottom:18px;">PSIQUÊ E EROS</div>
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(25px,5.4vw,40px); line-height:1.2; margin:0; color:#1B2420; text-wrap:pretty;">Existe uma história de dois mil anos que explica por que você se sente assim — e ela começa com <em style="font-style:italic; color:#B9636A;">uma mulher que perdeu o amor</em></h2>
+      </div>
+      <div data-rv="1" style="margin:0 0 clamp(34px,5vw,48px); border-radius:12px; overflow:hidden; aspect-ratio:950/720; max-width:620px; margin-left:auto; margin-right:auto; box-shadow:0 24px 50px rgba(40,30,20,.18);">
+        <img src="./assets/mito-lotus.webp" alt="Lótus e luas: a união do divino feminino e masculino" loading="lazy" decoding="async" style="display:block; width:100%; height:100%; object-fit:cover;">
+      </div>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:clamp(18px,3vw,22px);">
+        <p style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:clamp(19px,4.4vw,23px); line-height:1.5; color:#2E7D64; margin:0;">Um mito grego explica sua vida melhor do que qualquer diagnóstico.</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.82); margin:0;">Psiquê — que em grego significa "alma" — era uma mulher bela e completa, casada com um amor verdadeiro: Eros. Havia uma única condição: ela não podia vê-lo. Ela deveria amá-lo pelo que ele era, e não pela aparência. Até que, convencida pelas vozes de fora — as irmãs invejosas, o julgamento alheio — ela duvidou. Acendeu uma vela para espiar o rosto do amado, quebrou a confiança, e perdeu o amor.</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.82); margin:0;">A partir daí, Psiquê vagou pelo mundo. Exausta. Sozinha. Punida por forças maiores que ela — até cair num sono profundo, sem vontade de viver.</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.82); margin:0;">E então ocorre a virada: Eros vem despertá-la. Não para levá-la de volta ao castelo. Ele a desperta para a imortalidade. E entrega a ela o verdadeiro amor — que nunca tinha vindo de fora. Sempre esteve dentro dela.</p>
+      </div>
+
+      <div data-rv="1" style="margin-top:clamp(38px,5.6vw,56px); padding-top:clamp(32px,5vw,44px); border-top:1px solid rgba(168,135,76,.35);">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#A8874C; margin-bottom:16px;">AGORA ENTENDA A ALEGORIA</div>
+        <p style="font-family:'Bodoni Moda',serif; font-size:clamp(21px,4.8vw,27px); line-height:1.4; color:#1B2420; margin:0 0 20px;">Psiquê é você.</p>
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.82); margin:0;">A alma sem o amor se sente mal, deprimida, sem energia e sem vontade de viver. O Eros que você perdeu não é um homem lá fora — é a reconexão com a sua própria espiritualidade, com o divino masculino dentro de você, se unindo ao seu divino feminino num processo alquímico que devolve à alma o que foi roubado dela.</p>
+          <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.82); margin:0;">E o que foi roubado? As partes suas que se tornaram sombra porque não foram aceitas: sua sexualidade, sua autoestima, seu magnetismo, seu poder quântico de curandeira, sua força ancestral, o poder das mulheres poderosas que vieram antes de você e que está no seu DNA.</p>
+        </div>
+        <div style="margin-top:clamp(26px,4vw,34px); padding:clamp(20px,3.6vw,28px) clamp(22px,4vw,32px); border-radius:10px; background:#1B2420; color:#F6EEE3;">
+          <p style="font-family:'Bodoni Moda',serif; font-size:clamp(19px,4.4vw,24px); line-height:1.45; margin:0;">Você não está cansada porque é fraca. Você está esgotada porque está <em style="font-style:italic; color:#E7A79B;">desconectada do seu próprio poder.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ A MATRIX ============ -->
+  <section data-screen-label="Matrix" style="background:radial-gradient(900px 560px at 50% 0%, rgba(185,99,106,.16), transparent 62%), #08130F;">
+    <div style="max-width:1080px; margin:0 auto; padding:clamp(70px,10vw,112px) 22px;">
+      <div data-rv="1" style="max-width:760px; margin:0 auto clamp(38px,5.4vw,54px); text-align:center;">
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(26px,5.6vw,42px); line-height:1.18; margin:0 0 22px; color:#F6EEE3; text-wrap:pretty;">Você vai continuar deixando a matrix te vampirizar <em style="font-style:italic; color:#E7A79B;">até quando?</em></h2>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.78); margin:0 0 14px;">Aqui vai a parte que ninguém diz em voz alta:</p>
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.78); margin:0;">O sistema — essa matriz que vampiriza energeticamente as pessoas — depende de você apagada. Depende de você obediente, boazinha, controlável, gastando sua energia vital com medo, culpa e aprovação, enquanto essa mesma energia deveria estar criando abundância, confiança, conexão espiritual e prosperidade para você.</p>
+      </div>
+      <div data-rv="1" style="font-size:11px; font-weight:500; letter-spacing:.22em; color:#D8B77A; text-align:center; margin-bottom:22px;">CADA DIA EM QUE VOCÊ CONTINUA PERFORMANDO PARA OS OUTROS</div>
+      <div data-3col="1" data-stag="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2.4vw,22px);">
+        <div style="padding:clamp(24px,4vw,30px); border-radius:12px; background:rgba(13,31,25,.7); border:1px solid rgba(216,183,122,.16);">
+          <div style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1; color:#B9636A; margin-bottom:16px;">I</div>
+          <p style="font-size:clamp(15.5px,3.8vw,17px); font-weight:300; line-height:1.64; color:rgba(241,234,223,.8); margin:0;">sua energia sexual — a energia mais pura e poderosa que uma mulher possui, a mesma que cria vida, curas e oportunidades — continua sendo drenada em vez de ser transformada em poder de criação;</p>
+        </div>
+        <div style="padding:clamp(24px,4vw,30px); border-radius:12px; background:rgba(13,31,25,.7); border:1px solid rgba(216,183,122,.16);">
+          <div style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1; color:#B9636A; margin-bottom:16px;">II</div>
+          <p style="font-size:clamp(15.5px,3.8vw,17px); font-weight:300; line-height:1.64; color:rgba(241,234,223,.8); margin:0;">seu corpo continua carregando o peso de padrões mentais que não foram construídos por você, e sim por uma visão masculina de mundo que te ensinou a ter medo de ser quem você é;</p>
+        </div>
+        <div style="padding:clamp(24px,4vw,30px); border-radius:12px; background:rgba(13,31,25,.7); border:1px solid rgba(216,183,122,.16);">
+          <div style="font-family:'Bodoni Moda',serif; font-size:30px; line-height:1; color:#B9636A; margin-bottom:16px;">III</div>
+          <p style="font-size:clamp(15.5px,3.8vw,17px); font-weight:300; line-height:1.64; color:rgba(241,234,223,.8); margin:0;">as vozes que te julgam — homens, religião, até outras mulheres — continuam ganhando, porque ninguém te mostrou de onde vem a sua força real.</p>
+        </div>
+      </div>
+      <div data-rv="1" style="max-width:720px; margin:clamp(38px,5.4vw,52px) auto 0; text-align:center;">
+        <p style="font-size:clamp(16px,3.9vw,19px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.78); margin:0 0 20px;">O que isso significa na prática? Significa mais noites sem vontade de viver. Mais relacionamentos que não te entendem. Mais dinheiro que chega e escorre. Mais anos girando em círculos — até o dia em que você se olha no espelho e não reconhece mais a mulher que existia ali.</p>
+        <p style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:clamp(19px,4.4vw,24px); line-height:1.45; color:#E7A79B; margin:0;">E o pior: isso não é culpa sua. Ninguém te ensinou o caminho de volta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AS 4 FASES ============ -->
+  <section data-screen-label="4 fases" style="border-top:1px solid rgba(216,183,122,.12); background:#0B1A15;">
+    <div style="max-width:1160px; margin:0 auto; padding:clamp(70px,10vw,112px) 22px;">
+      <div data-rv="1" style="text-align:center; margin-bottom:clamp(36px,5.4vw,54px);">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#D8B77A; margin-bottom:16px;">AS 4 FASES DE TODA MULHER</div>
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(25px,5.4vw,40px); line-height:1.2; margin:0; color:#F6EEE3;">Olha para você e me diz em qual fase está:</h2>
+      </div>
+      <div data-4col="1" data-stag="1" style="display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,2vw,18px); align-items:stretch;">
+        <sc-for list="{{ phases }}" as="p" hint-placeholder-count="4">
+          <div style="display:flex; flex-direction:column; padding:clamp(24px,3.6vw,28px); border-radius:12px; background:{{ p.bg }}; border:1px solid {{ p.border }};">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:18px;">
+              <span style="font-family:'Bodoni Moda',serif; font-size:40px; line-height:1; color:{{ p.numColor }};">{{ p.n }}</span>
+              <sc-if value="{{ p.hasTag }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size:9.5px; font-weight:600; letter-spacing:.14em; color:{{ p.tagColor }}; padding:5px 9px; border-radius:999px; border:1px solid {{ p.tagColor }}; text-align:center;">{{ p.tag }}</span>
+              </sc-if>
+            </div>
+            <h3 style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:clamp(19px,4.2vw,21px); line-height:1.25; color:#F6EEE3; margin:0 0 12px;">{{ p.title }}</h3>
+            <p style="font-size:15.5px; font-weight:300; line-height:1.62; color:rgba(241,234,223,.74); margin:0;">{{ p.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div data-rv="1" style="max-width:740px; margin:clamp(36px,5.4vw,52px) auto 0; text-align:center;">
+        <p style="font-size:clamp(15.5px,3.8vw,17.5px); font-weight:300; line-height:1.7; color:rgba(241,234,223,.62); margin:0 0 18px;">Existe um quinto nível — a Mestra Quântica, a mulher indomável que se torna sacerdotisa e guia outras — mas isso é uma jornada mais profunda, que eu guardo para a escola.</p>
+        <p style="font-family:'Bodoni Moda',serif; font-size:clamp(20px,4.6vw,26px); line-height:1.42; color:#F6EEE3; margin:0;">Hoje, o que importa é isso: chegou a hora de você despertar <em style="font-style:italic; color:#E7A79B;">a Mulher Indomável</em> que está adormecida dentro de você.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ A SOLUÇÃO ============ -->
+  <section data-screen-label="Solução" style="background:radial-gradient(800px 600px at 80% 30%, rgba(46,125,100,.24), transparent 64%), #08130F; border-top:1px solid rgba(216,183,122,.12);">
+    <div style="max-width:1100px; margin:0 auto; padding:clamp(72px,10vw,116px) 22px;">
+      <div data-2col="1" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(34px,5vw,64px); align-items:start; margin-bottom:clamp(54px,8vw,86px);">
+        <div data-rv="1">
+          <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#D8B77A; margin-bottom:16px;">A SOLUÇÃO</div>
+          <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(27px,5.6vw,44px); line-height:1.14; margin:0 0 22px; color:#F6EEE3;">Imersão Resgate de Fractais — <em style="font-style:italic; color:#E7A79B;">Despertar Kundalínico</em></h2>
+          <p style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:clamp(18px,4.2vw,22px); line-height:1.5; color:#D8B77A; margin:0;">Eu criei uma imersão de dois dias que faz exatamente o que o mito descreve: desperta a Psiquê adormecida.</p>
+          <div style="margin-top:clamp(28px,4vw,38px); border-radius:12px; overflow:hidden; aspect-ratio:4/5; max-width:420px; border:1px solid rgba(216,183,122,.3); background:#EFE4D6; box-shadow:0 26px 56px rgba(0,0,0,.5);">
+            <img src="./assets/portrait.webp" alt="Mulher com fractais dourados despertando" loading="lazy" decoding="async" style="display:block; width:100%; height:100%; object-fit:cover; object-position:center 18%;">
+          </div>
+        </div>
+        <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">O nome pode soar denso, mas o processo é simples: existem fractais — padrões energéticos — gravados na sua estrutura desde antes de você nascer. Alguns são seus. Outros foram implantados, repetidos, vampirizados por gerações. A imersão vai localizar os fractais que não são seus, cortar os cordões invisíveis que drenam sua energia, e devolver a você os padrões originais da sua alma.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">E quando a energia volta a fluir do jeito certo, algo desperta na base da sua espinha: a Kundalini — sua energia criadora primordial, a mesma que une o divino masculino ao divino feminino dentro de você. É esse despertar que devolve o magnetismo, a alegria, a confiança e a vontade de viver.</p>
+          <div style="display:flex; gap:16px; align-items:stretch; margin-top:6px;">
+            <span aria-hidden="true" style="flex-shrink:0; width:2px; background:linear-gradient(180deg,#E7A79B,#2E7D64);"></span>
+            <p style="font-family:'Bodoni Moda',serif; font-size:clamp(17px,4vw,20px); line-height:1.55; color:#F6EEE3; margin:0;">Mulheres como Cleópatra entenderam esse segredo: a mulher que domina a própria energia interna nunca precisa implorar por nada lá fora — ela atrai. Ela é admirada inteira. Ela governa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div data-rv="1" style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#D8B77A; margin-bottom:24px;">NA IMERSÃO, VOCÊ VAI</div>
+      <div data-2col="1" data-stag="1" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2.2vw,20px);">
+        <sc-for list="{{ agenda }}" as="a" hint-placeholder-count="6">
+          <div style="display:flex; gap:18px; padding:clamp(22px,3.6vw,28px); border-radius:12px; background:rgba(13,31,25,.72); border:1px solid rgba(46,125,100,.32);">
+            <span style="flex-shrink:0; font-family:'Bodoni Moda',serif; font-size:26px; line-height:1; color:#E7A79B;">{{ a.n }}</span>
+            <p style="font-size:clamp(15.5px,3.8vw,17px); font-weight:300; line-height:1.62; color:rgba(241,234,223,.8); margin:0;"><span style="font-weight:500; color:#F6EEE3;">{{ a.lead }}</span>{{ a.rest }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POR QUE CONFIAR ============ -->
+  <section data-screen-label="Por que confiar" style="background:#0B1A15; border-top:1px solid rgba(216,183,122,.12);">
+    <div data-2col="1" style="max-width:1100px; margin:0 auto; padding:clamp(70px,10vw,112px) 22px; display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(34px,5vw,64px); align-items:start;">
+      <div data-rv="1" data-bio-photo="1" style="position:relative; max-width:420px; width:100%;">
+        <div aria-hidden="true" style="position:absolute; inset:-8%; background:radial-gradient(circle at 50% 40%, rgba(46,125,100,.38), rgba(185,99,106,.14) 55%, transparent 76%);"></div>
+        <div style="position:relative; border-radius:12px; overflow:hidden; border:1px solid rgba(216,183,122,.3); box-shadow:0 30px 70px rgba(0,0,0,.55);">
+          <img src="./assets/hamad-bio.webp" alt="Hamad" loading="lazy" decoding="async" style="display:block; width:100%;">
+        </div>
+        <div style="position:relative; margin-top:18px; display:flex; align-items:baseline; gap:12px; padding:18px 20px; border-radius:10px; background:rgba(13,31,25,.85); border:1px solid rgba(216,183,122,.22);">
+          <span style="font-family:'Bodoni Moda',serif; font-weight:700; font-size:34px; line-height:1; color:#E7A79B;">+3 mil</span>
+          <span style="font-size:14px; font-weight:300; line-height:1.4; color:rgba(241,234,223,.72);">alunas transformadas pelo método</span>
+        </div>
+      </div>
+      <div>
+        <div data-rv="1" style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#D8B77A; margin-bottom:16px;">POR QUE CONFIAR EM MIM?</div>
+        <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+          <p style="font-family:'Bodoni Moda',serif; font-size:clamp(20px,4.6vw,25px); line-height:1.42; color:#F6EEE3; margin:0;">Eu poderia te dar uma lista de títulos. Mas títulos não provam nada. Deixa eu te contar como eu cheguei até aqui.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Eu fui criado na igreja evangélica. E lá dentro eu aprendi três coisas: medo do inferno, medo de pecar, medo de ser eu mesmo. Eu não podia ser quem eu era. Então eu fiz o que muita gente faz quando a religião sufoca em vez de libertar: eu me tornei ateu.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Só que o ateísmo não me preencheu. Eu me sentia vazio, como se algo faltasse dentro de mim. E aos 21 anos, algo aconteceu que mudou tudo: eu despertei a minha Kundalini.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Foi a maior, a melhor sensação que eu já tive em toda a minha vida. Mas logo depois eu percebi que minha mente e meu corpo começaram a funcionar de forma diferente. E eu não estava preparado. Vivi surtos, crises emocionais, momentos em que tudo parecia desmoronar. Foram 12 anos. Doze anos para aprender a desenvolver a Kundalini com segurança.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">E foi dessa jornada — das crises, dos surtos, das descobertas — que nasceu o meu método. Um método que hoje já transformou mais de 3 mil alunas.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Hoje eu sou Mestre Espiritual, Reprogramador Quântico Rúnico, médium empata, incorporador, clarividente, iniciado nos mistérios da Deusa e especialista em Seidr Quântico. Mas nada disso importaria se eu não tivesse passado pelo que passei. Eu sei o que é se sentir perdida, vazia, com medo de ser quem se é. Eu saí disso. E eu conheço o caminho de volta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEM PRESSÃO ============ -->
+  <section data-screen-label="Sem pressão" style="border-top:1px solid rgba(216,183,122,.12);">
+    <div data-rv="1" style="max-width:760px; margin:0 auto; padding:clamp(64px,9vw,100px) 22px; text-align:center;">
+      <p style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:clamp(20px,4.6vw,26px); line-height:1.45; color:#E7A79B; margin:0 0 20px;">Ah, e por falar nisso... você reparou que eu não passei nenhum pincel de "vendedor" até aqui?</p>
+      <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Não tem urgência falsa, não tem contagem regressiva, não tem "últimas vagas". Porque o que eu vendo não precisa de pressão — precisa de verdade. E a verdade é essa: você já tentou de tudo lá fora, e o que faltava sempre foi a reconexão interna. Isso eu posso te entregar — porque eu mesmo precisei de 12 anos para encontrar o caminho, e hoje eu encurto essa jornada para você.</p>
+    </div>
+  </section>
+
+  <!-- ============ OFERTA ============ -->
+  <section id="oferta" data-screen-label="Oferta" style="background:linear-gradient(170deg,#F6EEE3 0%,#EFE0D4 100%); color:#1B2420;">
+    <div style="max-width:1140px; margin:0 auto; padding:clamp(72px,10vw,116px) 22px;">
+      <div data-rv="1" style="text-align:center; max-width:760px; margin:0 auto clamp(40px,6vw,60px);">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#A8874C; margin-bottom:16px;">O QUE VOCÊ RECEBE AO ENTRAR</div>
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(25px,5.4vw,40px); line-height:1.2; margin:0 0 16px; color:#1B2420; text-wrap:pretty;">A Imersão Resgate de Fractais — Despertar Kundalínico, dois dias de vivência completa, pelo valor simbólico de <em style="font-style:italic; color:#B9636A;">R$ 35.</em></h2>
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.66; color:rgba(27,36,32,.74); margin:0;">E para que você não precise fazer nada sozinha depois, eu ainda incluo:</p>
+      </div>
+
+      <div data-3col="1" data-stag="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2.2vw,20px); margin-bottom:clamp(44px,6.4vw,66px);">
+        <sc-for list="{{ bonuses }}" as="b" hint-placeholder-count="3">
+          <div style="display:flex; flex-direction:column; padding:clamp(24px,3.8vw,30px); border-radius:12px; background:#FFFAF3; border:1px solid rgba(168,135,76,.32); box-shadow:0 14px 34px rgba(60,40,20,.08);">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:18px;">
+              <span style="font-size:10.5px; font-weight:600; letter-spacing:.18em; color:#F6EEE3; background:#2E7D64; padding:6px 11px; border-radius:999px;">{{ b.tag }}</span>
+              <span style="font-size:13px; font-weight:400; color:rgba(27,36,32,.5);">valor sugerido <span style="text-decoration:line-through;">{{ b.value }}</span></span>
+            </div>
+            <h3 style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:clamp(20px,4.4vw,23px); line-height:1.25; color:#1B2420; margin:0 0 12px;">{{ b.title }}</h3>
+            <p style="font-size:15.5px; font-weight:300; line-height:1.62; color:rgba(27,36,32,.76); margin:0 0 16px; flex:1;">{{ b.text }}</p>
+            <p style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:16.5px; line-height:1.5; color:#B9636A; margin:0; padding-top:14px; border-top:1px solid rgba(168,135,76,.25);">{{ b.means }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-2col="1" style="display:grid; grid-template-columns:1fr 430px; gap:clamp(34px,5vw,64px); align-items:center;">
+        <div data-rv="1">
+          <p style="font-family:'Bodoni Moda',serif; font-size:clamp(22px,5vw,32px); line-height:1.3; color:#1B2420; margin:0 0 18px;">Tudo isso por R$ 35.</p>
+          <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(27,36,32,.78); margin:0;">Você não está comprando uma aula. Está trocando R$ 35 — o preço de um delivery — por um despertar que economiza anos de terapia, de relacionamentos errados e de energia desperdiçada. <em style="font-family:'Bodoni Moda',serif; color:#2E7D64;">Vendendo dólares por centavos — e eu sei disso.</em></p>
+        </div>
+
+        <!-- TICKET OFERTA -->
+        <div data-rv="1" style="width:100%; filter:drop-shadow(0 28px 44px rgba(40,30,20,.28));">
+          <div style="border-radius:14px 14px 0 0; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); mask-composite:intersect;">
+            <div style="background:linear-gradient(100deg,#2E7D64,#1E5A47 60%,#164536); padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:14px;">
+              <span style="font-weight:600; font-size:11px; letter-spacing:.2em; color:#F6EEE3;">INGRESSO · IMERSÃO</span>
+              <span style="font-weight:500; font-size:11px; letter-spacing:.16em; color:rgba(246,238,227,.65);">RDF-DK</span>
+            </div>
+            <div style="background:#1B2420; padding:24px 24px 22px;">
+              <div data-ticket-grid="1" style="display:grid; grid-template-columns:auto auto 1fr; gap:10px 18px; align-items:start;">
+                <div>
+                  <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#D8B77A; margin-bottom:7px; white-space:nowrap;">DATA</div>
+                  <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#F6EEE3; white-space:nowrap;">{{ eventDate }}</div>
+                </div>
+                <div>
+                  <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#D8B77A; margin-bottom:7px; white-space:nowrap;">DURAÇÃO</div>
+                  <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#F6EEE3; white-space:nowrap;">2 dias</div>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:10px; font-weight:500; letter-spacing:.2em; color:#D8B77A; margin-bottom:7px; white-space:nowrap;">FORMATO</div>
+                  <div style="font-family:'Bodoni Moda',serif; font-weight:500; font-size:19px; line-height:1.1; color:#F6EEE3; white-space:nowrap;">Online, ao vivo</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="border-radius:0 0 14px 14px; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); mask-composite:intersect;">
+            <div style="background:#1B2420; padding:0 24px;"><div style="border-top:2px dashed rgba(216,183,122,.45);"></div></div>
+            <div style="background:#1B2420; padding:22px 24px 24px; text-align:center;">
+              <div style="font-size:14px; font-weight:300; color:rgba(241,234,223,.55); margin-bottom:6px;">imersão + 3 bônus</div>
+              <div style="display:flex; align-items:baseline; justify-content:center; gap:6px;">
+                <span style="font-family:'Bodoni Moda',serif; font-size:30px; color:#F6EEE3;">R$</span>
+                <span style="font-family:'Bodoni Moda',serif; font-weight:700; font-size:76px; line-height:.9; color:#F6EEE3;">35</span>
+              </div>
+              <div style="font-size:12px; font-weight:500; letter-spacing:.16em; color:#E7A79B; margin-top:12px;">VALOR SIMBÓLICO · PAGAMENTO ÚNICO</div>
+            </div>
+            <div style="background:#13201B; padding:18px 24px 22px;">
+              <a href="{{ checkoutUrl }}" class="dk-cta" style="display:flex; align-items:center; justify-content:center; gap:11px; padding:19px; border-radius:8px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-weight:600; font-size:14px; letter-spacing:.1em; text-decoration:none; box-shadow:0 10px 26px rgba(201,123,112,.35);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>GARANTIR MINHA VAGA NA IMERSÃO</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GARANTIA ============ -->
+  <section data-screen-label="Garantia" style="background:radial-gradient(760px 520px at 24% 50%, rgba(46,125,100,.22), transparent 64%), #08130F;">
+    <div data-2col="1" style="max-width:1040px; margin:0 auto; padding:clamp(70px,10vw,108px) 22px; display:grid; grid-template-columns:.75fr 1.25fr; gap:clamp(30px,5vw,60px); align-items:center;">
+      <div data-rv="1" style="display:flex; justify-content:center;">
+        <img src="./assets/selo-garantia.webp" alt="Selo de garantia" loading="lazy" decoding="async" style="width:100%; max-width:300px; filter:drop-shadow(0 24px 50px rgba(0,0,0,.6)) hue-rotate(-10deg);">
+      </div>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+        <div style="font-size:11px; font-weight:500; letter-spacing:.24em; color:#D8B77A;">100% DE GARANTIA DE 1 DIA</div>
+        <h2 style="font-family:'Bodoni Moda',serif; font-weight:400; font-size:clamp(26px,5.6vw,40px); line-height:1.16; margin:0; color:#F6EEE3;">O risco é todo meu</h2>
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Escuta. Eu sei que você já se decepcionou com promessas demais. Por isso, a garantia aqui é simples e direta:</p>
+        <p style="font-family:'Bodoni Moda',serif; font-size:clamp(18px,4.2vw,22px); line-height:1.5; color:#F6EEE3; margin:0; padding:18px 22px; border-radius:10px; background:rgba(46,125,100,.16); border:1px solid rgba(46,125,100,.42);">Participe do primeiro dia da imersão. Se você não sentir nenhuma mudança — nenhuma — devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem constrangimento.</p>
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Não é sua culpa se as outras experiências falharam. E se esta não funcionar para você, o prejuízo é meu, não seu. Você só precisa participar. A responsabilidade pelo resultado, eu assumo.</p>
+        <a href="{{ checkoutUrl }}" class="dk-cta" style="display:inline-flex; align-self:flex-start; align-items:center; gap:10px; margin-top:8px; padding:18px 30px; border-radius:999px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-weight:600; font-size:13.5px; letter-spacing:.1em; text-decoration:none; box-shadow:0 12px 30px rgba(201,123,112,.3);">CLIQUE AQUI E GARANTA SUA VAGA NA IMERSÃO →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ P.S. / FECHO ============ -->
+  <section data-screen-label="PS" data-last="1" style="background:radial-gradient(900px 620px at 50% 60%, rgba(185,99,106,.2), transparent 66%), #0B1A15; border-top:1px solid rgba(216,183,122,.16);">
+    <div style="max-width:760px; margin:0 auto; padding:clamp(72px,10vw,116px) 22px clamp(60px,8vw,90px);">
+      <div data-rv="1" style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:clamp(34px,7vw,48px); line-height:1; color:#D8B77A; margin-bottom:24px;">P.S.</div>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Pense bem no que vai acontecer se você não agir agora. Daqui a dois dias, sua vida continua igual — ou pior. Você continua acordando cansada. Continua performando para os outros. Continua sentindo que ser mulher é errado. Continua vendo sua energia ser drenada por pessoas e padrões que não te merecem. Daqui a um ano, você pode estar exatamente no mesmo lugar, com mais uma desculpa acumulada — e a chama interna, mais apagada.</p>
+        <p style="font-size:clamp(16px,3.9vw,18.5px); font-weight:300; line-height:1.72; color:rgba(241,234,223,.8); margin:0;">Ou você pode fazer o que a Psiquê fez no final do mito: deixar Eros te despertar. O amor, a alegria, a confiança, o magnetismo e a abundância que você procura já estão dentro de você — adormecidos, esperando. São R$ 35 e dois dias para cortar os cordões e acordar a mulher que você nasceu para ser.</p>
+        <p style="font-family:'Bodoni Moda',serif; font-size:clamp(21px,4.9vw,28px); line-height:1.38; color:#F6EEE3; margin:8px 0 0;">A Mulher Indomável não espera o momento perfeito. <em style="font-style:italic; color:#E7A79B;">Ela cria o momento.</em></p>
+      </div>
+      <a data-rv="1" href="{{ checkoutUrl }}" class="dk-cta" style="display:flex; align-items:center; justify-content:center; gap:11px; width:100%; max-width:480px; margin:clamp(34px,5vw,46px) 0 0; padding:20px 30px; border-radius:999px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-weight:600; font-size:clamp(13px,3.3vw,14.5px); letter-spacing:.1em; text-decoration:none; box-shadow:0 14px 36px rgba(201,123,112,.32);">QUERO DESPERTAR MINHA KUNDALINI AGORA →</a>
+    </div>
+    <div style="border-top:1px solid rgba(216,183,122,.14);">
+      <div style="max-width:1100px; margin:0 auto; padding:26px 22px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <span style="font-size:11px; letter-spacing:.2em; color:rgba(241,234,223,.45);">IMERSÃO RESGATE DE FRACTAIS · DESPERTAR KUNDALÍNICO</span>
+        <span style="font-family:'Bodoni Moda',serif; font-style:italic; font-size:15px; color:rgba(241,234,223,.4);">Instituto Mundos Entrelaçados</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FIXO MOBILE ============ -->
+  <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+    <div data-sticky="1" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:80; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(8,19,15,.95); border-top:1px solid rgba(216,183,122,.28); backdrop-filter:blur(8px); animation:dkIn .3s ease-out;">
+      <div style="display:flex; align-items:center; gap:12px; max-width:520px; margin:0 auto;">
+        <div style="flex:1; min-width:0; line-height:1.2;">
+          <div style="font-family:'Bodoni Moda',serif; font-weight:700; font-size:20px; color:#F6EEE3;">R$ 35</div>
+          <div style="font-size:11px; letter-spacing:.06em; color:rgba(241,234,223,.6); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">2 dias ao vivo + 3 bônus</div>
+        </div>
+        <a href="{{ checkoutUrl }}" class="dk-cta" style="flex-shrink:0; padding:15px 22px; border-radius:999px; background:linear-gradient(120deg,#F3C2B8,#E09A8C 60%,#C97B70); color:#2A1214; font-weight:600; font-size:12px; letter-spacing:.1em; text-decoration:none;">GARANTIR VAGA</a>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;checkoutUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#oferta&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Oferta&quot;},&quot;eventDate&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A confirmar&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ingresso&quot;},&quot;navDate&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;DOIS DIAS · AO VIVO · ONLINE&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ingresso&quot;}}">
+class Component extends DCLogic {
+  state = { pastHero: false };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const hero = document.querySelector('#topo');
+      const past = hero ? window.scrollY > hero.offsetTop + hero.offsetHeight - 90 : window.scrollY > 600;
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+
+    const targets = document.querySelectorAll('[data-rv], [data-stag]');
+    if ('IntersectionObserver' in window) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('dk-in'); this._io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
+      targets.forEach((el) => this._io.observe(el));
+      this._safety = setTimeout(() => targets.forEach((el) => el.classList.add('dk-in')), 6000);
+    } else {
+      targets.forEach((el) => el.classList.add('dk-in'));
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._safety) clearTimeout(this._safety);
+  }
+
+  renderVals() {
+    const date = this.props.eventDate ?? 'A confirmar';
+    const highlight = { bg: 'linear-gradient(170deg, rgba(185,99,106,.22), rgba(13,31,25,.7))', border: 'rgba(231,167,155,.5)', numColor: '#E7A79B', tagColor: '#E7A79B' };
+    const goal = { bg: 'linear-gradient(170deg, rgba(46,125,100,.34), rgba(13,31,25,.7))', border: 'rgba(46,125,100,.7)', numColor: '#D8B77A', tagColor: '#D8B77A' };
+    const base = { bg: 'rgba(13,31,25,.6)', border: 'rgba(216,183,122,.14)', numColor: 'rgba(216,183,122,.6)', tagColor: '#D8B77A' };
+    return {
+      checkoutUrl: this.props.checkoutUrl ?? '#oferta',
+      eventDate: date,
+      navDate: (this.props.navDate ?? 'DOIS DIAS · AO VIVO · ONLINE'),
+      showSticky: this.state.pastHero,
+      phases: [
+        { ...base, n: '1', hasTag: false, tag: '', title: 'A Mulher Controlável', text: 'Faz tudo que esperam dela, não questiona, dá conta de tudo e de todos. Vive para aprovação.' },
+        { ...base, n: '2', hasTag: false, tag: '', title: 'A Mulher Adormecida', text: 'Sente que algo está errado, mas nem sabe nomear. Vive como marionete do sistema, repetindo padrões que não escolheu.' },
+        { ...highlight, n: '3', hasTag: true, tag: 'A MAIORIA FICA AQUI', title: 'A Mulher Acordada, mas Ainda Controlável', text: 'Ela já percebeu que o mundo não é o que parece, já busca espiritualidade, já corre atrás de ajuda... mas ainda não descobriu a própria força. Sabe que existe algo maior, mas não sabe como acessá-lo. É aqui que a maioria fica presa — e é aqui que mais mulheres me procuram.' },
+        { ...goal, n: '4', hasTag: true, tag: 'O DESPERTAR', title: 'A Mulher Indomável', text: 'Redescobriu a força e o poder que sempre foram dela. Alinhou o masculino e o feminino internos. Não pede permissão para existir. É magnética, admirada inteira — não em partes escolhidas.' }
+      ],
+      agenda: [
+        { n: '01', lead: 'Cortar os cordões energéticos', rest: ' que conectam você a pessoas, lugares e padrões que drenam sua vitalidade — para que você possa acordar leve, com o que é seu de volta;' },
+        { n: '02', lead: 'Resgatar os fractais da sua linhagem', rest: ' — o poder ancestral das mulheres do seu sangue, que está no seu DNA esperando permissão para existir — o que significa que você deixa de carregar o peso delas e passa a carregar a força delas;' },
+        { n: '03', lead: 'Despertar sua Kundalini com segurança e método', rest: ' — para que sua energia vital (incluindo sua energia sexual, a mais pura força criativa que existe) pare de ser vampirizada e comece a criar abundância, oportunidades e curas na sua vida;' },
+        { n: '04', lead: 'Realinhar seu divino masculino e divino feminino', rest: ' — o casamento alquímico interno que Eros e Psiquê representam — para que você pare de buscar fora o que só pode ser completado dentro;' },
+        { n: '05', lead: 'Quebrar o ciclo da performance', rest: ' — para que você finalmente possa ser você mesma sem julgamento, sem culpa, sem precisar pedir desculpa por existir;' },
+        { n: '06', lead: 'Receber seu protocolo diário de transmutação', rest: ' — porque a energia precisa continuar fluindo depois da imersão, e você vai sair com o caminho nas mãos.' }
+      ],
+      bonuses: [
+        { tag: 'BÔNUS 1', value: 'R$ 47', title: 'Caderno de Exercícios da Mulher Indomável', text: 'Um guia prático para você registrar seu processo, seus resgates e suas ancoragens — para que o despertar não se perca na rotina.', means: 'O que significa: você transforma a imersão em um método de vida, não em um fim de semana passageiro.' },
+        { tag: 'BÔNUS 2', value: 'R$ 97', title: 'Workshop Chama Gêmea', text: 'A vivência que trabalha sua energia de parceria e conexão verdadeira — para que você atraia (ou transforme) um relacionamento que te enxergue inteira, não pela metade.', means: 'O que significa: deixar de se sentir uma estranha dentro dos próprios relacionamentos.' },
+        { tag: 'BÔNUS 3', value: 'R$ 147', title: 'Curso Prático de Transmutação Diária: 10 Portais', text: 'Dez portais energéticos, um por dia, para você transmutar a energia do dia a dia — o estresse, a culpa, o cansaço, as energias alheias — antes que elas te vampirizem de novo.', means: 'O que significa: você deixa de ser esponja e vira filtro.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

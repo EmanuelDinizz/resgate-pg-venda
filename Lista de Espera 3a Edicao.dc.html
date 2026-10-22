@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#0B0A10; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#E0BD6E; }
+  a:hover { color:#F0D79A; }
+  @keyframes lwGlow { 0%,100%{ opacity:0.5 } 50%{ opacity:1 } }
+  @keyframes lwIn { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:none } }
+  @keyframes lwKen { from { transform:scale(1.07) } to { transform:scale(1) } }
+  @keyframes lwFloat { 0%,100%{ transform:translateY(-50%) } 50%{ transform:translateY(calc(-50% - 16px)) } }
+  [data-hero-bg] { animation: lwFloat 7s ease-in-out infinite; will-change:transform;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 34%, rgba(0,0,0,0.5) 52%, transparent 68%);
+    mask-image: radial-gradient(circle at 50% 50%, #000 34%, rgba(0,0,0,0.5) 52%, transparent 68%); }
+  [data-h] { opacity:0; animation: lwIn 0.85s cubic-bezier(0.22,0.8,0.3,1) forwards; }
+  [data-h="1"] { animation-delay:0.06s } [data-h="2"] { animation-delay:0.18s }
+  [data-h="3"] { animation-delay:0.30s } [data-h="4"] { animation-delay:0.42s }
+  [data-h="5"] { animation-delay:0.54s }
+  [data-rv] { opacity:0; transform:translateY(26px); transition:opacity .8s cubic-bezier(.22,.8,.3,1), transform .8s cubic-bezier(.22,.8,.3,1) }
+  [data-rv].lw-in { opacity:1; transform:none }
+  [data-stag] > * { opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.22,.8,.3,1), transform .7s cubic-bezier(.22,.8,.3,1) }
+  [data-stag].lw-in > * { opacity:1; transform:none }
+  [data-stag].lw-in > *:nth-child(1){transition-delay:.05s} [data-stag].lw-in > *:nth-child(2){transition-delay:.13s}
+  [data-stag].lw-in > *:nth-child(3){transition-delay:.21s} [data-stag].lw-in > *:nth-child(4){transition-delay:.29s}
+  [data-stag].lw-in > *:nth-child(5){transition-delay:.37s}
+  .lw-cta { transition: background .25s ease, transform .2s ease, box-shadow .25s ease }
+  .lw-cta:hover { background:#C25C36 }
+  .lw-cta:active { transform:scale(.985) }
+  @media (min-width:821px) {
+    [data-hero-copy] { max-width: min(660px, 54%) !important }
+  }
+  @media (max-width:820px) {
+    [data-2col] { grid-template-columns:1fr !important }
+    [data-bio-photo] { order:-1; justify-self:center }
+    [data-nav-wordmark] { font-size:10px !important; letter-spacing:0.14em !important }
+    [data-hero-scrim] { background:linear-gradient(180deg, rgba(11,10,16,0.18) 0%, rgba(11,10,16,0.34) 32%, rgba(11,10,16,0.86) 66%, rgba(11,10,16,0.98) 100%) !important }
+    #topo { min-height:auto !important }
+    [data-hero-bg] { position:static !important; order:-1; top:auto !important; right:auto !important; width:58% !important; max-width:260px; margin:clamp(16px,4vw,26px) auto 0; transform:none !important; animation:none !important }
+    [data-hero-inner] { justify-content:flex-start !important; padding-top:clamp(18px,4vw,26px) !important }
+    [data-hero-inner] { justify-content:flex-end !important; padding-top:34px !important; padding-bottom:44px !important }
+    [data-sticky] { display:block !important }
+    [data-last] { padding-bottom:92px !important }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-h],[data-rv],[data-stag] > * { opacity:1 !important; transform:none !important; animation:none !important; transition:none !important }
+    [data-hero-bg] { animation:none !important }
+  }
+</style>
+</helmet>
+<div style="position:relative; background:#0B0A10; color:#F4EBDC; font-family:'Cormorant Garamond',Georgia,serif; overflow-x:hidden;">
+
+  <!-- ============ BARRA TOPO ============ -->
+  <div style="position:relative; z-index:60; background:linear-gradient(90deg,#5C1A2E,#8A2D52 50%,#5C1A2E); border-bottom:1px solid rgba(201,162,74,0.35);">
+    <div style="max-width:1240px; margin:0 auto; padding:9px 20px; display:flex; align-items:center; justify-content:center; gap:11px; text-align:center;">
+      <span style="flex-shrink:0; display:inline-block; width:7px; height:7px; transform:rotate(45deg); background:linear-gradient(135deg,#ECD9A8,#C9A24A); box-shadow:0 0 10px rgba(236,217,168,0.8); animation:lwGlow 2.4s ease-in-out infinite;"></span>
+      <span style="font-family:'Cinzel',serif; font-weight:700; font-size:clamp(9px,2.4vw,11.5px); letter-spacing:0.16em; color:#F4EBDC;">3ª EDIÇÃO · IMERSÃO RESGATE DE FRACTAIS DO INFERNO · ENTRADA ANTECIPADA PELA LISTA</span>
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <div style="position:sticky; top:0; z-index:50; backdrop-filter:blur(14px); background:rgba(10,9,15,0.78); border-bottom:1px solid rgba(201,162,74,0.18);">
+    <div style="max-width:1240px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:18px;">
+      <span data-nav-wordmark="1" style="font-family:'Cinzel',serif; font-weight:700; font-size:12px; letter-spacing:0.18em; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#9C7B33); -webkit-background-clip:text; background-clip:text; color:transparent;">RESGATE DE FRACTAIS DO INFERNO · 3ª EDIÇÃO</span>
+      <a href="{{ groupUrl }}" target="_blank" rel="noopener" class="lw-cta" style="flex-shrink:0; display:inline-flex; align-items:center; gap:9px; padding:11px 22px; border-radius:999px; background:#B5502E; color:#FBF3E9; font-family:'Cinzel',serif; font-weight:700; font-size:10.5px; letter-spacing:0.10em; text-decoration:none;">ENTRAR NA LISTA</a>
+    </div>
+  </div>
+
+  <!-- ============ BLOCO 1 · HERO ============ -->
+  <section id="topo" data-screen-label="Hero" style="position:relative; min-height:86vh; display:flex; flex-direction:column; overflow:hidden;">
+    <div aria-hidden="true" style="position:absolute; inset:0; background:radial-gradient(760px 620px at 76% 48%, rgba(201,162,74,0.22), transparent 66%), radial-gradient(900px 700px at 20% 80%, rgba(40,22,58,0.55), transparent 62%), #0B0A10;"></div>
+    <div data-hero-bg="1" aria-hidden="true" style="position:absolute; top:50%; right:4%; transform:translateY(-50%); width:min(36%,430px); aspect-ratio:1/1; background-image:url('./assets/hero-fractal.gif'); background-size:cover; background-position:center; background-repeat:no-repeat; mix-blend-mode:screen;"></div>
+    <div data-hero-scrim="1" aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(11,10,16,0.96) 0%, rgba(11,10,16,0.94) 46%, rgba(11,10,16,0.72) 60%, rgba(11,10,16,0.24) 74%, rgba(11,10,16,0.10) 100%);"></div>
+    <div aria-hidden="true" style="position:absolute; left:0; right:0; bottom:0; height:180px; background:linear-gradient(180deg, transparent, #0B0A10);"></div>
+
+    <div data-hero-inner="1" style="position:relative; z-index:2; flex:1; display:flex; flex-direction:column; justify-content:center; max-width:1240px; width:100%; margin:0 auto; padding:clamp(44px,7vw,70px) 22px clamp(70px,9vw,100px);">
+      <div data-hero-copy="1" style="max-width:660px;">
+        <div data-h="1" style="display:inline-flex; align-items:center; gap:11px; margin-bottom:clamp(20px,3.4vw,26px); padding:7px 15px 7px 7px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(201,162,74,0.3); backdrop-filter:blur(8px);">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:9px; letter-spacing:0.10em; color:#1A0E16; background:linear-gradient(120deg,#ECD9A8,#C9A24A); border-radius:999px; padding:4px 11px;">3ª EDIÇÃO</span>
+          <span style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.12em; color:rgba(244,235,220,0.85);">LISTA DE ENTRADA ANTECIPADA</span>
+        </div>
+
+        <h1 data-h="2" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(31px,6.6vw,56px); line-height:1.09; letter-spacing:-0.012em; margin:0 0 clamp(20px,3vw,26px); color:#F4EBDC; text-wrap:pretty;">Entre no grupo e tenha <em style="font-style:italic; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">acesso antecipado</em> a 3ª edição da Imersão Resgate de Fractais do Inferno</h1>
+
+        <p data-h="3" style="font-size:clamp(17px,4vw,21px); line-height:1.58; color:rgba(244,235,220,0.80); margin:0 0 clamp(28px,4vw,38px); max-width:56ch;">As duas primeiras lotaram. A terceira abre primeiro pra quem tá na lista. Entrou no grupo, cê escolhe a vaga antes de todo mundo, pega o lote antecipado e recebe a data em primeira mão.</p>
+
+        <a data-h="4" href="{{ groupUrl }}" target="_blank" rel="noopener" class="lw-cta" style="display:inline-flex; align-items:center; justify-content:center; gap:12px; width:100%; max-width:430px; padding:clamp(18px,4vw,21px) 34px; border-radius:999px; background:#B5502E; color:#FBF3E9; font-family:'Cinzel',serif; font-weight:700; font-size:clamp(13px,3.4vw,15px); letter-spacing:0.09em; text-decoration:none; box-shadow:0 14px 34px rgba(0,0,0,0.45);">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.178-.24-.583-.486-.5-.667-.51-.174-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+          QUERO ENTRAR NA LISTA
+        </a>
+
+        <div data-h="5" style="margin-top:clamp(34px,5vw,54px);">
+          <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.16em; color:rgba(244,235,220,0.58); margin-bottom:14px;">PRA QUEM SENTE O CAMPO E SABE QUANDO ALGUMA COISA TÁ PRESA</div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; font-family:'Cinzel',serif; font-size:clamp(10px,2.7vw,11.5px); letter-spacing:0.13em; color:rgba(224,189,110,0.88);">
+            <span>SACERDOTISAS</span><span style="color:rgba(201,162,74,0.5);">◆</span>
+            <span>BRUXAS</span><span style="color:rgba(201,162,74,0.5);">◆</span>
+            <span>MAGAS</span><span style="color:rgba(201,162,74,0.5);">◆</span>
+            <span>MÉDIUNS</span><span style="color:rgba(201,162,74,0.5);">◆</span>
+            <span>CURANDEIRAS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 2 · VOCÊ SE RECONHECE AQUI ============ -->
+  <section data-screen-label="Você se reconhece" style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div data-2col="1" style="max-width:1180px; margin:0 auto; padding:clamp(64px,9vw,100px) 22px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:clamp(34px,5vw,60px); align-items:center;">
+      <div data-rv="1" style="position:relative;">
+        <div aria-hidden="true" style="position:absolute; inset:-12%; background:radial-gradient(circle, rgba(138,45,82,0.38), transparent 66%); animation:lwGlow 6s ease-in-out infinite;"></div>
+        <div style="position:relative; border-radius:8px; overflow:hidden; border:1px solid rgba(201,162,74,0.28); box-shadow:0 30px 60px rgba(0,0,0,0.5);">
+          <img src="./assets/portrait.webp" alt="" loading="lazy" decoding="async" style="display:block; width:100%;">
+        </div>
+      </div>
+      <div data-stag="1">
+        <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E; margin-bottom:20px;">VOCÊ SE RECONHECE AQUI</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(21px,4.6vw,28px); line-height:1.4; color:#F4EBDC; margin:0 0 20px; font-weight:400;">Esse trabalho fala com a mulher que já tentou de tudo e continua cansada de um jeito que sono nenhum resolve.</p>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.74); margin:0 0 26px;">E fala, no centro, com quem já vive a linguagem da energia. Bruxa, maga, sacerdotisa, médium, curandeira. Gente que sente o campo e sabe quando alguma coisa tá presa.</p>
+        <div style="display:flex; align-items:stretch; gap:16px;">
+          <span aria-hidden="true" style="flex-shrink:0; width:3px; border-radius:999px; background:linear-gradient(180deg,#ECD9A8,#A9803A); box-shadow:0 0 14px rgba(201,162,74,0.5);"></span>
+          <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(19px,4.4vw,25px); line-height:1.4; color:#E0BD6E; margin:0;">O que liga essas mulheres é a mesma coisa. Fractal preso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 3 · O PADRÃO QUE VOLTA ============ -->
+  <section data-screen-label="O padrão que volta" style="position:relative; background:linear-gradient(180deg, rgba(40,22,58,0), rgba(40,22,58,0.35), rgba(40,22,58,0));">
+    <div style="max-width:920px; margin:0 auto; padding:clamp(70px,10vw,110px) 22px; text-align:center;">
+      <div data-rv="1" style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E; margin-bottom:24px;">O PADRÃO QUE VOLTA</div>
+      <h2 data-rv="1" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(26px,5.8vw,46px); line-height:1.15; margin:0 0 clamp(30px,4.6vw,42px); color:#F4EBDC; text-wrap:pretty;">Por que o mesmo padrão volta, mesmo quando cê faz <em style="font-style:italic; color:#E0BD6E;">tudo diferente?</em></h2>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:18px; max-width:680px; margin:0 auto clamp(30px,4.4vw,40px);">
+        <p style="font-size:clamp(18px,4.3vw,22px); line-height:1.5; color:rgba(244,235,220,0.82); margin:0;">A mesma relação com outro rosto. O mesmo tipo de chefe. A mesma sensação no peito que cê já sentiu em três fases diferentes da vida.</p>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.68); margin:0;">Cê funciona no automático e carrega um cansaço que não passa dormindo. É como andar com uma corrente que ninguém vê e que cê nunca conseguiu nomear.</p>
+      </div>
+      <p data-rv="1" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(20px,4.8vw,26px); line-height:1.4; color:#E0BD6E; margin:0;">Mas Hamad, será que o problema sou eu? Não. O problema nunca foi você.</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 4 · POR QUE NÃO RESOLVEU ============ -->
+  <section data-screen-label="Por que não resolveu" style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:1080px; margin:0 auto; padding:clamp(66px,9.4vw,104px) 22px;">
+      <div data-rv="1" style="text-align:center; max-width:760px; margin:0 auto clamp(36px,5.4vw,56px);">
+        <div style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E; margin-bottom:22px;">POR QUE NÃO RESOLVEU</div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(25px,5.6vw,44px); line-height:1.16; margin:0 0 22px; color:#F4EBDC; text-wrap:pretty;">A sua força vital não sumiu por fraqueza sua.</h2>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.70); margin:0;">Ela foi drenada e retida. Por sistema, por gente, por crença que entrou quando cê não tinha como recusar. A Matrix. O vampiro energético. A mente que te ensinaram a chamar de sua.</p>
+      </div>
+      <div data-2col="1" data-stag="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.6vw,24px);">
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:clamp(26px,4vw,34px) clamp(22px,3.4vw,30px);">
+          <div aria-hidden="true" style="width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:20px; margin-bottom:20px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Cê mexeu na cabeça</h3>
+          <p style="font-size:clamp(16px,3.9vw,18px); line-height:1.5; color:rgba(244,235,220,0.68); margin:0;">Terapia, leitura. Mas o que prende não tá no pensamento, tá no campo.</p>
+        </div>
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:clamp(26px,4vw,34px) clamp(22px,3.4vw,30px);">
+          <div aria-hidden="true" style="width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:20px; margin-bottom:20px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Cê trocou o de fora</h3>
+          <p style="font-size:clamp(16px,3.9vw,18px); line-height:1.5; color:rgba(244,235,220,0.68); margin:0;">Mudou de relação, de cidade, de trabalho. O fractal preso viaja junto e remonta o mesmo padrão no cenário novo.</p>
+        </div>
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:clamp(26px,4vw,34px) clamp(22px,3.4vw,30px);">
+          <div aria-hidden="true" style="width:40px; height:40px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:20px; margin-bottom:20px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Cê tentou sozinha</h3>
+          <p style="font-size:clamp(16px,3.9vw,18px); line-height:1.5; color:rgba(244,235,220,0.68); margin:0;">Tem trabalho que o campo de uma pessoa só não alcança. Precisa de campo coletivo. E isso cê não gera sozinha em casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 5 · O QUE VOLTA ============ -->
+  <section data-screen-label="O que volta" style="position:relative; background:radial-gradient(900px 520px at 50% 10%, rgba(98,28,49,0.30), transparent 62%);">
+    <div style="max-width:760px; margin:0 auto; padding:clamp(70px,10vw,110px) 22px;">
+      <div data-rv="1" style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E; margin-bottom:26px;">O QUE VOLTA QUANDO O FRACTAL É RESGATADO</div>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:clamp(20px,3.2vw,26px);">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(20px,4.6vw,27px); line-height:1.44; color:#F4EBDC; margin:0;">Imagina uma terça comum daqui a algumas semanas. Cê acorda antes do despertador e não sente aquele peso no peito. A energia voltou pro corpo. Cê tá onde cê tá, sem funcionar no automático. Alguém te pede alguma coisa e cê diz não sem ensaiar desculpa.</p>
+        <div style="display:flex; align-items:stretch; gap:16px;">
+          <span aria-hidden="true" style="flex-shrink:0; width:3px; border-radius:999px; background:linear-gradient(180deg,#ECD9A8,#A9803A); box-shadow:0 0 14px rgba(201,162,74,0.5);"></span>
+          <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.80); margin:0;">Isso é força vital de volta. Prazer no corpo, presença no que cê vive e poder pra mover a própria vida em vez de reagir ao mesmo padrão de sempre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 6 · POR QUE ENTRAR AGORA ============ -->
+  <section data-screen-label="Por que entrar agora" style="position:relative; background:linear-gradient(165deg,#F5EAD2 0%,#ECD8AC 100%);">
+    <div style="max-width:880px; margin:0 auto; padding:clamp(66px,9.4vw,104px) 22px;">
+      <div data-rv="1" style="text-align:center; margin-bottom:clamp(30px,4.6vw,42px);">
+        <div style="display:inline-flex; align-items:center; gap:12px; margin-bottom:18px;">
+          <span aria-hidden="true" style="width:24px; height:1px; background:#9C7B33;"></span>
+          <span style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.24em; color:#9C7B33;">POR QUE ENTRAR NO GRUPO AGORA</span>
+          <span aria-hidden="true" style="width:24px; height:1px; background:#9C7B33;"></span>
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:clamp(24px,5.4vw,40px); line-height:1.2; color:#2A1620; margin:0 0 14px; text-wrap:pretty;">A 3ª edição abre primeiro dentro do grupo.</h2>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:rgba(42,22,32,0.72); margin:0;">É lá que a coisa acontece antes.</p>
+      </div>
+
+      <div style="border:1px solid rgba(154,123,58,0.45); border-radius:6px; padding:clamp(22px,3.6vw,34px) clamp(20px,3.6vw,40px); background:rgba(255,255,255,0.36); box-shadow:inset 0 0 0 4px rgba(154,123,58,0.12);">
+        <div style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.2em; color:#9C7B33; margin-bottom:clamp(18px,3vw,24px);">QUEM ENTRA NA LISTA</div>
+        <div data-stag="1" style="display:flex; flex-direction:column;">
+          <div style="display:flex; align-items:flex-start; gap:15px; padding:14px 0; border-bottom:1px solid rgba(154,123,58,0.28);">
+            <span aria-hidden="true" style="flex-shrink:0; color:#B5502E; font-size:13px; line-height:1; margin-top:7px;">◆</span>
+            <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:#2A1620; margin:0;"><strong style="font-weight:600;">Escolhe a vaga primeiro.</strong> <span style="color:rgba(42,22,32,0.76);">As vagas são limitadas e quem tá no grupo entra na frente.</span></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:15px; padding:14px 0; border-bottom:1px solid rgba(154,123,58,0.28);">
+            <span aria-hidden="true" style="flex-shrink:0; color:#B5502E; font-size:13px; line-height:1; margin-top:7px;">◆</span>
+            <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:#2A1620; margin:0;"><strong style="font-weight:600;">Paga o lote antecipado.</strong> <span style="color:rgba(42,22,32,0.76);">O menor valor da 3ª edição fica reservado pra lista.</span></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:15px; padding:14px 0; border-bottom:1px solid rgba(154,123,58,0.28);">
+            <span aria-hidden="true" style="flex-shrink:0; color:#B5502E; font-size:13px; line-height:1; margin-top:7px;">◆</span>
+            <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:#2A1620; margin:0;"><strong style="font-weight:600;">Recebe a data em primeira mão</strong><span style="color:rgba(42,22,32,0.76);">, antes de qualquer anúncio.</span></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:15px; padding:14px 0; border-bottom:1px solid rgba(154,123,58,0.28);">
+            <span aria-hidden="true" style="flex-shrink:0; color:#B5502E; font-size:13px; line-height:1; margin-top:7px;">◆</span>
+            <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:#2A1620; margin:0;"><strong style="font-weight:600;">Entra nas lives exclusivas</strong> <span style="color:rgba(42,22,32,0.76);">que eu faço só pro grupo.</span></p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:15px; padding:14px 0;">
+            <span aria-hidden="true" style="flex-shrink:0; color:#B5502E; font-size:13px; line-height:1; margin-top:7px;">◆</span>
+            <p style="font-size:clamp(17px,4vw,20px); line-height:1.5; color:#2A1620; margin:0;"><strong style="font-weight:600;">Fica sabendo primeiro</strong> <span style="color:rgba(42,22,32,0.76);">de tudo sobre a próxima imersão.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <p data-rv="1" style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(18px,4.2vw,22px); line-height:1.45; color:rgba(42,22,32,0.78); margin:clamp(26px,4vw,34px) 0 0;">Fora do grupo, cê descobre depois. E depois, a vaga já pode ter fechado.</p>
+
+      <a data-rv="1" href="{{ groupUrl }}" target="_blank" rel="noopener" class="lw-cta" style="display:flex; align-items:center; justify-content:center; gap:12px; width:100%; max-width:430px; margin:clamp(28px,4.4vw,38px) auto 0; padding:clamp(18px,4vw,21px) 34px; border-radius:999px; background:#B5502E; color:#FBF3E9; font-family:'Cinzel',serif; font-weight:700; font-size:clamp(13px,3.4vw,15px); letter-spacing:0.09em; text-decoration:none; box-shadow:0 16px 34px rgba(90,40,20,0.30);">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.178-.24-.583-.486-.5-.667-.51-.174-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        ENTRAR NO GRUPO AGORA
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 7 · QUEM ESTÁ TE GUIANDO ============ -->
+  <section data-screen-label="Quem conduz" style="position:relative; border-top:1px solid rgba(201,162,74,0.14); background:radial-gradient(900px 560px at 78% 40%, rgba(232,103,43,0.14), transparent 60%); overflow:hidden;">
+    <div data-2col="1" style="max-width:1080px; margin:0 auto; padding:clamp(66px,9.4vw,104px) 22px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(30px,4.6vw,60px); align-items:center;">
+      <div data-stag="1">
+        <div style="display:inline-flex; align-items:center; gap:13px; margin-bottom:22px;">
+          <span aria-hidden="true" style="width:32px; height:1px; background:linear-gradient(90deg, transparent, #C9A24A);"></span>
+          <span style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E;">QUEM ESTÁ TE GUIANDO</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(23px,5vw,30px); line-height:1.34; color:#F4EBDC; margin:0 0 22px;">Eu não nasci diferente de você.</p>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.6; color:rgba(244,235,220,0.76); margin:0 0 18px;">Aos 13 anos rompi com a religião que dizia que eu era pecador, que Deus tava fora de mim. Fiquei sozinho, sem saber quem eu era.</p>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.6; color:rgba(244,235,220,0.76); margin:0 0 18px;">Até encontrar uma tecnologia que chegou onde nada tinha chegado. Não no meu pensamento. <span style="color:#E0BD6E;">No meu campo.</span></p>
+        <p style="font-size:clamp(17px,4vw,20px); line-height:1.6; color:rgba(244,235,220,0.76); margin:0 0 26px;">Hoje minha missão é uma só. Guiar mulher de volta pra si mesma. Não porque eu sou especial. Porque eu estava onde cê tá. E encontrei o caminho de volta.</p>
+        <div style="display:flex; align-items:baseline; gap:13px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:19px; letter-spacing:0.14em; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#9C7B33); -webkit-background-clip:text; background-clip:text; color:transparent;">HAMAD</span>
+          <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:rgba(244,235,220,0.52);">Instituto Mundos Entrelaçados</span>
+        </div>
+      </div>
+      <div data-rv="1" data-bio-photo="1" style="position:relative; display:flex; justify-content:center; max-width:400px; width:100%;">
+        <div aria-hidden="true" style="position:absolute; inset:-10%; background:radial-gradient(circle at 50% 40%, rgba(232,103,43,0.28), rgba(98,28,49,0.18) 55%, transparent 75%); animation:lwGlow 6s ease-in-out infinite;"></div>
+        <div style="position:relative; border-radius:10px; overflow:hidden; border:1px solid rgba(201,162,74,0.35); box-shadow:0 30px 70px rgba(0,0,0,0.55);">
+          <img src="./assets/hamad-bio.webp" alt="Hamad" loading="lazy" decoding="async" style="display:block; width:100%;">
+          <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,10,16,0.12), transparent 30%, transparent 70%, rgba(11,10,16,0.55)); pointer-events:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 8 · ANTES DE ENTRAR ============ -->
+  <section data-screen-label="Antes de entrar" style="position:relative; background:linear-gradient(180deg, rgba(15,11,22,0.5), rgba(15,11,22,0)); border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:880px; margin:0 auto; padding:clamp(66px,9.4vw,100px) 22px;">
+      <div data-rv="1" style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#D9BE7E; margin-bottom:clamp(28px,4.4vw,40px);">ANTES DE ENTRAR</div>
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:clamp(30px,4.6vw,44px);">
+        <div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:clamp(21px,4.7vw,28px); line-height:1.3; color:#E0BD6E; margin:0 0 14px;">Mas Hamad, e quando vai ser?</h3>
+          <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.76); margin:0;">A data sai primeiro no grupo. Quem tá lá dentro organiza a agenda antes, escolhe a vaga antes e paga menos. É pra isso que a lista existe.</p>
+        </div>
+        <div style="border-top:1px solid rgba(201,162,74,0.16); padding-top:clamp(28px,4.4vw,42px);">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:clamp(21px,4.7vw,28px); line-height:1.3; color:#E0BD6E; margin:0 0 14px;">Mas Hamad, será que é pra mim?</h3>
+          <p style="font-size:clamp(17px,4vw,20px); line-height:1.58; color:rgba(244,235,220,0.76); margin:0;">É pra você se cê se vê repetindo o mesmo padrão e já cansou de resolver isso só pensando. Se o cansaço não passa com sono. Se cê sente que tem força sua parada em algum lugar e quer de volta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 9 · CHAMADA FINAL ============ -->
+  <section data-screen-label="Chamada final" data-last="1" style="position:relative; background:radial-gradient(900px 600px at 50% 55%, rgba(98,28,49,0.42), transparent 66%); border-top:1px solid rgba(201,162,74,0.2);">
+    <div data-rv="1" style="max-width:800px; margin:0 auto; padding:clamp(76px,10vw,116px) 22px clamp(62px,8vw,96px); text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(28px,6.2vw,50px); line-height:1.13; margin:0 0 24px; color:#F4EBDC; text-wrap:pretty;">A sua força vital tá esperando <em style="font-style:italic; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">pra voltar.</em></h2>
+      <p style="font-size:clamp(17px,4.1vw,21px); line-height:1.58; color:rgba(244,235,220,0.76); margin:0 0 18px; max-width:56ch; margin-left:auto; margin-right:auto;">Cê pode seguir trocando o lado de fora e reencontrando o mesmo nó. Ou pode entrar na lista agora e estar na primeira fila quando a 3ª edição abrir.</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(18px,4.3vw,23px); line-height:1.45; color:#E0BD6E; margin:0 0 clamp(32px,5vw,44px);">Cê não precisa decidir a imersão inteira hoje. Decide só o próximo passo. Entrar no grupo.</p>
+
+      <a href="{{ groupUrl }}" target="_blank" rel="noopener" class="lw-cta" style="display:flex; align-items:center; justify-content:center; gap:12px; width:100%; max-width:470px; margin:0 auto; padding:clamp(19px,4.2vw,23px) 34px; border-radius:999px; background:#B5502E; color:#FBF3E9; font-family:'Cinzel',serif; font-weight:700; font-size:clamp(13px,3.3vw,15px); letter-spacing:0.08em; text-decoration:none; box-shadow:0 16px 40px rgba(0,0,0,0.5);">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="19" height="19" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.178-.24-.583-.486-.5-.667-.51-.174-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        QUERO ENTRAR NA LISTA · 3ª EDIÇÃO
+      </a>
+    </div>
+
+    <div style="border-top:1px solid rgba(201,162,74,0.16);">
+      <div style="max-width:1080px; margin:0 auto; padding:28px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+        <span style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.18em; color:rgba(244,235,220,0.5);">RESGATE DE FRACTAIS DO INFERNO · 3ª EDIÇÃO</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:rgba(244,235,220,0.42);">Instituto Mundos Entrelaçados · Sob o amor da Deusa</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FIXO MOBILE ============ -->
+  <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+    <div data-sticky="1" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:80; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(11,10,16,0.94); border-top:1px solid rgba(201,162,74,0.3); backdrop-filter:blur(8px); animation:lwIn 0.3s ease-out;">
+      <a href="{{ groupUrl }}" target="_blank" rel="noopener" class="lw-cta" style="display:flex; align-items:center; justify-content:center; gap:10px; padding:16px 20px; border-radius:999px; background:#B5502E; color:#FBF3E9; font-family:'Cinzel',serif; font-weight:700; font-size:12.5px; letter-spacing:0.08em; text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.347-.347.52-.52.174-.174.232-.298.347-.497.115-.198.057-.371-.03-.52-.086-.148-.66-1.59-.904-2.178-.24-.583-.486-.5-.667-.51-.174-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+        QUERO ENTRAR NA LISTA
+      </a>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;groupUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://meugrupo.vip/c/d6cdf62d-f580-49c8-a506-d6606d071e2d&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Captura&quot;}}">
+class Component extends DCLogic {
+  state = { pastHero: false };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const hero = document.querySelector('#topo');
+      const past = hero ? window.scrollY > hero.offsetTop + hero.offsetHeight - 90 : window.scrollY > 520;
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+
+    const targets = document.querySelectorAll('[data-rv], [data-stag]');
+    if ('IntersectionObserver' in window) {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('lw-in'); this._io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+      targets.forEach((el) => this._io.observe(el));
+      this._safety = setTimeout(() => targets.forEach((el) => el.classList.add('lw-in')), 6000);
+    } else {
+      targets.forEach((el) => el.classList.add('lw-in'));
+    }
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._safety) clearTimeout(this._safety);
+  }
+
+  renderVals() {
+    return {
+      groupUrl: this.props.groupUrl ?? 'https://meugrupo.vip/c/d6cdf62d-f580-49c8-a506-d6606d071e2d',
+      showSticky: this.state.pastHero
+    };
+  }
+}
+</script>
+</body>
+</html>

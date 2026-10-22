@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  body { margin:0; background:#0B0A10; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior:smooth; }
+  @keyframes rfFloat { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
+  @keyframes rfGlow { 0%,100%{ opacity:0.5 } 50%{ opacity:1 } }
+  @keyframes rfPulse { 0%,100%{ box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 0 38px rgba(201,162,74,0.30), 0 14px 34px rgba(0,0,0,0.45) } 50%{ box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 0 72px rgba(201,162,74,0.55), 0 14px 34px rgba(0,0,0,0.45) } }
+  @keyframes rfTwinkle { 0%,100%{ opacity:0.35 } 50%{ opacity:0.9 } }
+  @keyframes rfBlobA { 0%{ transform:translate(0,0) scale(1) } 33%{ transform:translate(90px,50px) scale(1.18) } 66%{ transform:translate(-70px,30px) scale(0.92) } 100%{ transform:translate(0,0) scale(1) } }
+  @keyframes rfBlobB { 0%{ transform:translate(0,0) scale(1) } 50%{ transform:translate(-100px,-60px) scale(1.22) } 100%{ transform:translate(0,0) scale(1) } }
+  @keyframes rfBlobC { 0%{ transform:translate(0,0) scale(1) } 40%{ transform:translate(80px,-50px) scale(0.9) } 80%{ transform:translate(60px,60px) scale(1.12) } 100%{ transform:translate(0,0) scale(1) } }
+  [data-mob-fixed] { display: none; }
+  @media (max-width: 820px) {
+    [data-mob-fixed] { display: block; }
+    [data-screen-label="Fecho"], section:last-of-type { padding-bottom: 104px; }
+  }
+  @keyframes rfSweep { 0%{ background-position:130% 0 } 55%,100%{ background-position:-130% 0 } }
+  @media (max-width: 820px) {
+    /* collapse every multi-column grid to a single column */
+    div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    div[style*="gap: 64px"], div[style*="gap: 56px"], div[style*="gap: 60px"] { gap: 36px !important; }
+    /* reduce big horizontal padding on section content wrappers */
+    section > div { padding-left: 22px !important; padding-right: 22px !important; }
+    /* hide center pill-nav, keep logo + date */
+    nav[style*="border-radius: 999px"] { display: none !important; }
+    div[data-nav] > div { padding-left: 16px !important; padding-right: 16px !important; gap: 10px !important; }
+    /* shrink logo wordmark + date so the bar never overflows on phones */
+    div[data-nav] a [style*="font-size: 14px"] { font-size: 11px !important; }
+    div[data-nav] > div > div[style*="font-size: 14px"] { font-size: 9px !important; letter-spacing: 0.06em !important; }
+    div[data-nav] svg { width: 12px !important; height: 12px !important; }
+    div[data-nav] img { width: 30px !important; height: 30px !important; }
+    /* fluid display type */
+    h1[style*="font-size: 62px"] { font-size: 33px !important; line-height: 1.12 !important; }
+    [style*="font-size: 58px"] { font-size: 32px !important; line-height: 1.12 !important; }
+    [style*="font-size: 52px"] { font-size: 31px !important; line-height: 1.14 !important; }
+    [style*="font-size: 46px"] { font-size: 28px !important; line-height: 1.18 !important; }
+    [style*="font-size: 44px"] { font-size: 27px !important; line-height: 1.18 !important; }
+    [style*="font-size: 42px"] { font-size: 26px !important; line-height: 1.18 !important; }
+    [style*="font-size: 40px"] { font-size: 25px !important; line-height: 1.18 !important; }
+    [style*="font-size: 64px"] { font-size: 40px !important; }
+    [style*="font-size: 76px"] { font-size: 54px !important; }
+    [style*="font-size: 56px"] { font-size: 34px !important; }
+    [style*="font-size: 50px"] { font-size: 34px !important; }
+    /* body / lead text */
+    [style*="font-size: 30px"] { font-size: 24px !important; }
+    [style*="font-size: 28px"] { font-size: 22px !important; }
+    [style*="font-size: 26px"] { font-size: 21px !important; }
+    [style*="font-size: 25px"] { font-size: 21px !important; }
+    [style*="font-size: 24px"] { font-size: 20px !important; }
+    [style*="font-size: 23px"] { font-size: 19px !important; }
+    [style*="font-size: 22px"] { font-size: 18px !important; }
+    [style*="font-size: 21px"] { font-size: 18px !important; }
+    [style*="font-size: 20px"] { font-size: 17px !important; }
+    [style*="font-size: 19px"] { font-size: 17px !important; }
+    /* tighten vertical rhythm */
+    section > div[style*="padding: 110px"], section > div[style*="padding: 104px"],
+    section > div[style*="padding: 100px"], section > div[style*="padding: 96px"],
+    section > div[style*="padding: 120px"] { padding-top: 60px !important; padding-bottom: 60px !important; }
+    /* hero spacing — bounded image band up top so the photo reads at real scale */
+    [data-topbanner] { display: none !important; }
+    [data-hero-badge] { display: none !important; }
+    #topo { min-height: auto !important; }
+    [data-hero-content] { padding-top: 150px !important; padding-bottom: 36px !important; justify-content: flex-end !important; }
+    [data-hero-content] > div { max-width: 100% !important; }
+    /* constrain the bg to a top band: `cover` then keys off ~500px, not the full column */
+    [data-hero-bg] { inset: -46px 0 auto 0 !important; height: 250px !important; background-position: 62% 24% !important; }
+    [data-hero-topfade] { height: 48px !important; background: linear-gradient(180deg, rgba(11,10,16,0.55), transparent) !important; }
+    /* clear over the band, solid below it */
+    [data-hero-scrim] { background: linear-gradient(180deg, rgba(11,10,16,0.12) 0px, rgba(11,10,16,0.08) 80px, rgba(11,10,16,0.45) 130px, rgba(11,10,16,0.88) 165px, #0B0A10 200px) !important; }
+    /* keep hero CTAs full-width and tidy */
+    [data-hero-el] a { width: 100% !important; justify-content: center !important; }
+    /* bio section: photo first, tighter and centered */
+    [data-bio-grid] { gap: 30px !important; }
+    [data-bio-photo] { order: -1; }
+    [data-bio-photo] > div:last-child { max-width: 260px; }
+    [data-bio-photo] img { max-width: 260px !important; }
+    [data-bio-text] { text-align: left; }
+    [data-bio-text] p[style*="font-size: 30px"] { font-size: 24px !important; }
+    /* robust type-based fallbacks (don't depend on inline px-string matching) */
+    #topo h1 { font-size: 32px !important; line-height: 1.12 !important; }
+    #topo > div p { font-size: 17px !important; }
+    [data-prints] { column-count: 2 !important; column-gap: 10px !important; }
+    [data-ticket] [style*="grid-template-columns: auto auto 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 18px 16px !important; }
+    [data-ticket] [style*="grid-template-columns: auto auto 1fr"] > div:nth-child(3) { grid-column: 1 / -1; text-align: left !important; }
+    /* neutralize any hard-coded pixel widths so nothing overflows the viewport */
+    [style*="width: 500px"], [style*="width:500px"] { width: auto !important; max-width: 100% !important; }
+    [style*="width: 600px"], [style*="width:600px"] { width: auto !important; max-width: 100% !important; }
+    /* number step blocks wrap nicer */
+    div[style*="min-width: 84px"], span[style*="min-width: 84px"] { min-width: 60px !important; }
+  }
+</style>
+</helmet>
+<div style="position:relative; background:radial-gradient(1300px 760px at 82% 30%, rgba(98,28,49,0.30), transparent 58%), radial-gradient(1100px 900px at 6% 60%, rgba(40,22,58,0.42), transparent 56%), #0B0A10; color:#F4EBDC; font-family:'Cormorant Garamond',Georgia,serif; overflow-x:clip;">
+
+  <!-- ============ ALERTA FLUTUANTE · ÚLTIMO DIA ============ -->
+  <!-- ============ BARRAS FIXAS MOBILE · PROGRESSO + CTA ============ -->
+  <sc-if value="{{ alertVisible }}" hint-placeholder-val="{{ false }}">
+    <div data-mob-fixed="1">
+      <div data-mob-pill="1" style="position:fixed; left:0; right:0; top:0; z-index:92; padding:10px 14px; pointer-events:none;">
+        <div style="display:flex; align-items:center; gap:12px; padding:11px 16px; border-radius:12px; background:#F5EAD2; box-shadow:0 8px 24px rgba(0,0,0,0.45);">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:0.16em; color:#2A1620; flex-shrink:0;">LOTE 02</span>
+          <span style="flex:1; height:8px; border-radius:999px; background:rgba(42,22,32,0.14); overflow:hidden; display:block;">
+            <span data-bar="1" data-target="99" style="display:block; height:100%; width:99%; border-radius:999px; background:linear-gradient(90deg,#7A1220,#C02A24 55%,#F0562E);"></span>
+          </span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:12px; color:#A81E22; flex-shrink:0;">99%</span>
+        </div>
+      </div>
+      <div data-mob-cta="1" style="position:fixed; left:0; right:0; bottom:0; z-index:92; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:#F5EAD2; border-radius:20px 20px 0 0; box-shadow:0 -10px 30px rgba(0,0,0,0.5);">
+        <a href="{{ checkoutUrl }}" style="display:flex; align-items:center; justify-content:center; gap:10px; padding:19px; border-radius:12px; background:linear-gradient(100deg,#E8672B,#FF5100 55%,#E8672B); color:#FFF6E4; font-family:'Cinzel',serif; font-weight:700; font-size:15px; letter-spacing:0.10em; text-decoration:none; box-shadow:0 6px 18px rgba(232,103,43,0.5);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>GARANTIR LOTE 2</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ AVISO · ÚLTIMAS VAGAS ============ -->
+  <div data-topbanner="1" style="position:relative; z-index:51; background:linear-gradient(90deg,#A9803A,#ECD9A8 50%,#A9803A); border-bottom:1px solid rgba(90,60,18,0.35);">
+    <div style="max-width:1240px; margin:0 auto; padding:9px 20px; display:flex; align-items:center; justify-content:center; gap:12px; text-align:center;">
+      <span style="display:inline-block; width:7px; height:7px; transform:rotate(45deg); background:#5C1A2E; animation:rfGlow 2.2s ease-in-out infinite; flex-shrink:0;"></span>
+      <span style="font-family:'Cinzel',serif; font-weight:700; font-size:12px; letter-spacing:0.20em; color:#2A1620;">LOTE DOIS FECHANDO · ÚLTIMAS VAGAS</span>
+      <span style="display:inline-block; width:7px; height:7px; transform:rotate(45deg); background:#5C1A2E; animation:rfGlow 2.2s ease-in-out infinite; flex-shrink:0;"></span>
+    </div>
+  </div>
+
+  <!-- ============ STICKY NAV ============ -->
+  <div data-nav="1" style="position:sticky; top:0; z-index:50; backdrop-filter:blur(16px); background:rgba(10,9,15,0.72); border-bottom:1px solid rgba(201,162,74,0.18);">
+    
+  <div style="max-width:1240px; margin:0 auto; padding:13px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="#topo" style="display:flex; align-items:center; gap:13px; text-decoration:none;">
+        <img src="./assets/selo.webp" alt="" style="width:38px; height:38px; border-radius:50%; object-fit:cover; box-shadow:0 0 18px rgba(201,162,74,0.4);">
+        <span style="display:flex; flex-direction:column; line-height:1;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:14px; letter-spacing:0.18em; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#9C7B33); -webkit-background-clip:text; background-clip:text; color:transparent;">RESGATE DE FRACTAIS</span>
+          <span style="font-family:'Cinzel',serif; font-size:8px; letter-spacing:0.40em; color:rgba(244,235,220,0.5); margin-top:4px;">DO INFERNO</span>
+        </span>
+      </a>
+      
+      <div style="display: flex; align-items: center; gap: 9px; color: rgba(244,235,220,0.8); font-family: 'Cinzel',serif; font-size: 14px; letter-spacing: 0.10em">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E0BD6E" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" width="15" height="15"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+        26 DE SETEMBRO | 09H ÀS 16H
+      </div>
+    </div></div>
+
+  <!-- ============ HERO ============ -->
+  <section id="topo" style="position:relative; min-height:calc(100vh - 64px); display:flex; flex-direction:column; overflow:hidden;">
+    <div data-hero-bg="1" style="position:absolute; inset:0; background-image:url('./assets/hero-bg.webp'); background-size:cover; background-position:72% center; background-repeat:no-repeat;"></div>
+    <div aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none;">
+      <div style="position:absolute; top:-12%; left:-6%; width:620px; height:620px; border-radius:50%; background:radial-gradient(circle, rgba(236,217,168,0.30), rgba(201,162,74,0) 70%); filter:blur(78px); mix-blend-mode:screen; animation:rfBlobA 17s ease-in-out infinite;"></div>
+      <div style="position:absolute; bottom:-14%; left:6%; width:700px; height:700px; border-radius:50%; background:radial-gradient(circle, rgba(179,155,255,0.26), rgba(57,51,148,0) 70%); filter:blur(86px); mix-blend-mode:screen; animation:rfBlobB 21s ease-in-out infinite;"></div>
+    </div>
+    <!-- left scrim for text legibility -->
+    <div data-hero-scrim="1" style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(11,10,16,0.94) 0%, rgba(11,10,16,0.82) 32%, rgba(11,10,16,0.45) 56%, rgba(11,10,16,0.12) 78%, transparent 100%);"></div>
+    <div style="position:absolute; left:0; right:0; bottom:0; height:200px; background:linear-gradient(180deg, transparent, #0B0A10);"></div>
+    <div data-hero-topfade="1" style="position:absolute; left:0; right:0; top:0; height:120px; background:linear-gradient(180deg, rgba(11,10,16,0.7), transparent);"></div>
+
+    <div data-hero-content="1" style="position:relative; z-index:10; flex:1; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; text-align:left; padding:60px 40px 110px; max-width:1240px; width:100%; margin:0 auto;">
+      <div style="max-width:600px;">
+      <div data-hero-el="1" data-hero-badge="1" style="display:inline-flex; align-items:center; gap:11px; margin-bottom:26px; padding:7px 14px 7px 7px; border-radius:999px; background:rgba(255,255,255,0.06); border:1px solid rgba(201,162,74,0.28); backdrop-filter:blur(8px);">
+        <span style="font-family:'Cinzel',serif; font-weight:700; font-size:9.5px; letter-spacing:0.10em; color:#1A0E16; background:linear-gradient(120deg,#ECD9A8,#C9A24A); border-radius:999px; padding:4px 11px;">LOTE DOIS</span>
+        <span style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.12em; color:rgba(244,235,220,0.85);">IMERSÃO AO VIVO · 26 DE SETEMBRO</span>
+      </div>
+
+      <h1 data-hero-el="1" style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:62px; line-height:1.07; letter-spacing:-0.01em; margin:0 0 24px; color:#F4EBDC; max-width:600px;"><b>Recupere sua energia, liberte emoções aprisionadas e volte a viver com mais <em style="font-style: italic; background: linear-gradient(120deg, rgb(236, 217, 168), rgb(201, 162, 74) 60%, rgb(169, 128, 58)) text; color: transparent;">prazer, presença e poder.</em></b></h1>
+
+      <p data-hero-el="1" style="font-size:21px; line-height:1.55; color:rgba(244,235,220,0.78); margin:0 0 40px; max-width:540px;">Pedaços da sua energia ficaram presos em histórias que você nunca terminou de viver — os <span style="color: rgb(224, 189, 110); font-style: italic;">fractais</span>. No dia 26 de setembro, ao vivo e em grupo, a gente vai resgatar essa força de volta.</p>
+
+      <div data-hero-el="1" data-ticket="1" style="width:100%; max-width:440px; margin:8px 0 0; position:relative; filter:drop-shadow(0 26px 44px rgba(0,0,0,0.6));">
+
+        <div style="border-radius:14px 14px 0 0; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); mask-composite:intersect;">
+          <div style="background:linear-gradient(100deg,#8A2D52,#621C31 60%,#4E1626); padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:14px;">
+            <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:0.18em; color:#F4EBDC;">INGRESSO · LOTE 02</span>
+            <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:0.14em; color:rgba(244,235,220,0.65);">RDF-26</span>
+          </div>
+          <div style="background:#F5EAD2; padding:22px 24px 20px;">
+            <div style="display:grid; grid-template-columns:auto auto 1fr; gap:10px 22px; align-items:start;">
+              <div>
+                <div style="font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:6px; white-space:nowrap;">DATA</div>
+                <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; line-height:1; color:#2A1620; white-space:nowrap;">26 set</div>
+              </div>
+              <div>
+                <div style="font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:6px; white-space:nowrap;">HORÁRIO</div>
+                <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; line-height:1; color:#2A1620; white-space:nowrap;">9h às 16h</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:6px; white-space:nowrap;">FORMATO</div>
+                <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:22px; line-height:1; color:#2A1620; white-space:nowrap;">Online, ao vivo</div>
+              </div>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:14px; color:rgba(42,22,32,0.55); margin-top:11px;">Horário de Brasília</div>
+          </div>
+        </div>
+
+        <div style="border-radius:0 0 14px 14px; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); mask-composite:intersect;">
+          <div style="background:#F5EAD2; padding:0 24px;">
+            <div style="border-top:2px dashed rgba(154,123,58,0.55);"></div>
+          </div>
+          <div style="background:#F5EAD2; padding:22px 24px 24px; text-align:center;">
+            <div style="font-size:15px; color:rgba(42,22,32,0.5); text-decoration:line-through; margin-bottom:8px;">Valor original R$197</div>
+            <div style="display:flex; align-items:baseline; justify-content:center; gap:5px;">
+              <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:30px; color:#2A1620;">R$</span>
+              <span style="font-family:'Cinzel',serif; font-weight:800; font-size:66px; line-height:0.9; color:#2A1620;">35</span>
+              <span style="font-family:'Cinzel',serif; font-weight:700; font-size:22px; color:#8A2D52;">,00</span>
+              <span style="font-family:'Cormorant Garamond',serif; font-size:19px; color:rgba(42,22,32,0.55); margin-left:6px;">à vista</span>
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:8px; margin-top:14px; padding:8px 18px; border-radius:999px; border:1px solid rgba(154,123,58,0.5); background:rgba(255,255,255,0.45);">
+              <span style="font-family:'Cormorant Garamond',serif; font-size:16px; color:rgba(42,22,32,0.7);">pagamento único ·</span>
+              <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:0.08em; color:#2A1620;">ACESSO NO DIA</span>
+            </div>
+          </div>
+          <div style="background:#EADDBE; padding:20px 24px 22px;">
+            <a href="{{ checkoutUrl }}" style="display:flex; align-items:center; justify-content:center; gap:11px; padding:19px; border-radius:8px; background:linear-gradient(120deg,#ECD9A8,#C9A24A 55%,#B8893A); color:#1A0E16; font-family:'Cinzel',serif; font-weight:700; font-size:14px; letter-spacing:0.06em; text-decoration:none; box-shadow:0 8px 22px rgba(120,86,26,0.35);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>QUERO MINHA VAGA</a>
+            <div style="margin-top:16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-family:'Cinzel',serif; font-weight:700; font-size:10px; letter-spacing:0.1em; color:#A81E22;">99% DOS INGRESSOS VENDIDOS</span>
+                <span style="font-family:'Cinzel',serif; font-weight:700; font-size:10px; letter-spacing:0.1em; color:rgba(42,22,32,0.55);">A R$35</span>
+              </div>
+              <div style="height:7px; border-radius:999px; background:rgba(42,22,32,0.14); overflow:hidden;">
+                <div data-bar="1" data-target="99" style="height:100%; width:99%; border-radius:999px; background:linear-gradient(90deg,#7A1220,#C02A24 55%,#F0562E);"></div>
+              </div>
+            </div>
+            <a href="#como-funciona" style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; font-family:'Cinzel',serif; font-weight:700; font-size:11px; letter-spacing:0.10em; color:#8A5A1E; text-decoration:none;">VER COMO FUNCIONA<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14" style="flex-shrink:0;"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div data-hero-el="1" style="margin-top:54px;">
+        <div style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.16em; color:rgba(244,235,220,0.55); margin-bottom:18px;">PARA QUEM SENTE O CAMPO E SABE QUANDO ALGO ESTÁ PRESO</div>
+        <div style="display:flex; flex-wrap:wrap; gap:12px 22px; align-items:center; justify-content:flex-start; font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.14em; color:rgba(224,189,110,0.85);">
+          <span>SACERDOTISAS</span>
+          <span style="color:rgba(201,162,74,0.5);">◆</span>
+          <span>BRUXAS</span>
+          <span style="color:rgba(201,162,74,0.5);">◆</span>
+          <span>MAGAS</span>
+          <span style="color:rgba(201,162,74,0.5);">◆</span>
+          <span>MÉDIUNS</span>
+          <span style="color:rgba(201,162,74,0.5);">◆</span>
+          <span>CURANDEIROS</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 2 · VOCÊ SE RECONHECE ============ -->
+  <section data-s2="1" style="position:relative; border-top:1px solid rgba(201,162,74,0.14); overflow:hidden;">
+    <div style="max-width:1180px; margin:0 auto; padding:96px 40px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center;">
+      <div data-s2-img="1" style="position:relative; will-change:transform;">
+        <div data-s2-glow="1" style="position: absolute; inset: -14%; animation: rfGlow 6s ease-in-out infinite; background-color: #00000000"></div>
+        <div data-s2-frame="1" style="position:relative; border-radius:8px; overflow:hidden; border:1px solid rgba(201,162,74,0.3); box-shadow:0 30px 60px rgba(0,0,0,0.5);">
+          <img src="./assets/portrait.webp" alt="" loading="lazy" decoding="async" style="display:block; position:relative; width:100%;">
+          <div style="position:absolute; inset:0; background:linear-gradient(115deg, transparent 38%, rgba(255,240,210,0.22) 48%, rgba(255,240,210,0.05) 54%, transparent 64%); background-size:280% 100%; animation:rfSweep 6.5s ease-in-out infinite; mix-blend-mode:screen; pointer-events:none;"></div>
+        </div>
+      </div>
+      <div>
+        <div data-s2-line="1" style="display:inline-flex; align-items:center; gap:13px; margin-bottom:22px;">
+          <span data-s2-bar="1" style="display:inline-block; width:34px; height:1px; background:linear-gradient(90deg, transparent, #C9A24A); transform-origin:left center;"></span>
+          <span style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E;">VOCÊ SE RECONHECE AQUI</span>
+        </div>
+        <p data-s2-line="1" style="font-family:'Cormorant Garamond',serif; font-size:28px; line-height:1.4; color:#F4EBDC; margin:0 0 22px; font-weight:400;">Esse trabalho fala com a mulher que já tentou de tudo e segue cansada de um jeito que sono nenhum resolve.</p>
+        <p data-s2-line="1" style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0 0 30px;">E fala, no centro, com quem já vive a linguagem da energia: bruxas, magas, sacerdotisas, médiuns, curandeiros. Gente que sente o campo e sabe quando alguma coisa está presa.</p>
+        <div data-s2-line="1" style="display:flex; align-items:stretch; gap:18px;">
+          <span data-s2-accent="1" style="flex-shrink:0; width:3px; border-radius:999px; background:linear-gradient(180deg,#ECD9A8,#A9803A); transform-origin:top center; box-shadow:0 0 14px rgba(201,162,74,0.5);"></span>
+          <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:25px; line-height:1.4; color:#E0BD6E; margin:0;">O que liga essas pessoas é a mesma coisa. Fractal preso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 3 · O PROBLEMA ============ -->
+  <section id="problema" style="position:relative; background:linear-gradient(180deg, rgba(40,22,58,0.0), rgba(40,22,58,0.35), rgba(40,22,58,0.0));">
+    <div data-reveal="1" style="max-width:920px; margin:0 auto; padding:110px 40px; text-align:center;">
+      <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:26px;">O PADRÃO QUE VOLTA</div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:46px; line-height:1.14; margin:0 0 44px; color:#F4EBDC;">Por que o mesmo padrão volta, mesmo quando você faz <em style="font-style:italic; color:#E0BD6E;">tudo diferente?</em></h2>
+      <div style="display:flex; flex-direction:column; gap:18px; max-width:680px; margin:0 auto 40px;">
+        <p style="font-size:22px; line-height:1.5; color:rgba(244,235,220,0.82); margin:0;">A mesma relação com outro rosto. O mesmo tipo de chefe. A mesma sensação no peito que você já sentiu em três fases diferentes da vida.</p>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.66); margin:0;">Você funciona no automático e carrega um cansaço que não passa dormindo. É como andar com correntes que ninguém vê e que você nunca conseguiu nomear.</p>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; line-height:1.4; color:#E0BD6E; margin:0;">A pergunta que fica: por que eu repito isso, mesmo sabendo que não quero?</p>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 4 · A CULPA NÃO É SUA ============ -->
+  <section style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:1080px; margin:0 auto; padding:104px 40px;">
+      <div data-reveal="1" style="text-align:center; max-width:760px; margin:0 auto 56px;">
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:24px;">O QUE VOCÊ JÁ TENTOU</div>
+        <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 500; font-size: 44px; line-height: 1.14; margin: 0 0 24px; color: #F4EBDC; width: 500px; text-align: center; display: inline-block">A culpa não é sua. E o nível do problema é outro.</h2>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.68); margin:0;">A sua energia não sumiu por fraqueza. Ela foi drenada e retida — por sistemas, por pessoas, por crenças que entraram quando você não tinha como recusar. A Matrix, o vampiro energético, o demiurgo, a mente patriarcal que te ensinaram a chamar de sua.</p>
+      </div>
+      <div data-reveal-group="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:34px 30px;">
+          <div style="width:42px; height:42px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:22px; margin-bottom:22px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:16px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Você mexeu na cabeça</h3>
+          <p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.66); margin:0;">Terapia, leitura, mentalidade. Mas o que prende não está no pensamento, está no campo. Pensamento bom não solta o que está preso na energia.</p>
+        </div>
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:34px 30px;">
+          <div style="width:42px; height:42px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:22px; margin-bottom:22px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:16px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Você trocou o de fora</h3>
+          <p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.66); margin:0;">Mudou de relação, de cidade, de trabalho. O fractal preso viaja junto e remonta o mesmo padrão no cenário novo.</p>
+        </div>
+        <div style="background:linear-gradient(180deg, rgba(28,18,48,0.55), rgba(15,11,22,0.4)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:34px 30px;">
+          <div style="width:42px; height:42px; border-radius:50%; border:1.5px solid rgba(138,45,82,0.8); display:flex; align-items:center; justify-content:center; color:#C9577E; font-size:22px; margin-bottom:22px;">✕</div>
+          <h3 style="font-family:'Cinzel',serif; font-size:16px; letter-spacing:0.04em; color:#E0BD6E; margin:0 0 12px;">Você tentou sozinha</h3>
+          <p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.66); margin:0;">Tem trabalho que o campo de uma pessoa só não alcança. Precisa de um campo coletivo, e isso você não gera sozinha em casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 5 · O QUE VOLTA ============ -->
+  <section style="position:relative; background:radial-gradient(900px 500px at 50% 0%, rgba(98,28,49,0.30), transparent 60%);">
+    <div style="max-width:1080px; margin:0 auto; padding:110px 40px;">
+      <div data-reveal="1" style="text-align:center; margin-bottom:18px;">
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:26px;">O QUE VOLTA QUANDO O FRACTAL É RESGATADO</div>
+        <h2 style="font-family:'Cinzel',serif; font-weight:700; font-size:46px; letter-spacing:0.06em; margin:0; background:linear-gradient(120deg,#ECD9A8,#C9A24A 55%,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">PRAZER · PRESENÇA · PODER</h2>
+        <p style="font-size:19px; color:rgba(244,235,220,0.55); margin:18px 0 0; font-style:italic;">Não é abstrato.</p>
+      </div>
+      <div data-reveal-group="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin:56px 0 70px;">
+        <div style="text-align:center; padding:0 8px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:30px; color:#E0BD6E; margin-bottom:14px;">Prazer</div>
+          <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">A energia voltando para o corpo — então mais disposição para viver.</p>
+        </div>
+        <div style="text-align:center; padding:0 8px; border-left:1px solid rgba(201,162,74,0.18); border-right:1px solid rgba(201,162,74,0.18);">
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:30px; color:#E0BD6E; margin-bottom:14px;">Presença</div>
+          <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">Sair do automático — então você volta a estar onde está.</p>
+        </div>
+        <div style="text-align:center; padding:0 8px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:30px; color:#E0BD6E; margin-bottom:14px;">Poder</div>
+          <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">Mover a própria vida — em vez de reagir ao mesmo padrão.</p>
+        </div>
+      </div>
+      <sc-if value="{{ showProof }}" hint-placeholder-val="{{ true }}">
+        <div data-reveal="1">
+          <div style="text-align:center; font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.24em; color:rgba(244,235,220,0.5); margin-bottom:28px;">QUEM JÁ FEZ O TRABALHO COM O HAMAD</div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch;">
+            <div style="display:flex; flex-direction:column; background:linear-gradient(180deg, rgba(28,18,48,0.5), rgba(15,11,22,0.35)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:30px 28px;">
+              <div style="font-family:'Cormorant Garamond',serif; font-size:48px; line-height:0.6; color:rgba(201,162,74,0.55); margin-bottom:10px;">"</div>
+              <p style="flex:1; font-size:19px; line-height:1.5; color:#F4EBDC; margin:0 0 24px;">Já fiz muitos cursos. O áudio me deixou emocionada, as lágrimas rolaram pelo meu rosto. Tenho certeza que minha vida vai modificar.</p>
+              <div style="display:flex; align-items:center; gap:14px; border-top:1px solid rgba(201,162,74,0.16); padding-top:18px;">
+                <img src="./assets/marilda.avif" alt="Marilda F." loading="lazy" decoding="async" style="width:48px; height:48px; flex-shrink:0; border-radius:50%; object-fit:cover; border:1px solid rgba(201,162,74,0.3);">
+                <div>
+                  <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.06em; color:#E0BD6E;">Marilda F.</div>
+                  <div style="font-size:15px; font-style:italic; color:rgba(244,235,220,0.55);">aluna · 10 Portais</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; background:linear-gradient(180deg, rgba(28,18,48,0.5), rgba(15,11,22,0.35)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:30px 28px;">
+              <div style="font-family:'Cormorant Garamond',serif; font-size:48px; line-height:0.6; color:rgba(201,162,74,0.55); margin-bottom:10px;">"</div>
+              <p style="flex:1; font-size:19px; line-height:1.5; color:#F4EBDC; margin:0 0 24px;">Como é bom estar no lugar certo, com um professor que entende do que ensina. Depois dos exercícios, me encontro firme, decidido. Sinto a presença Divina em mim de forma consciente.</p>
+              <div style="display:flex; align-items:center; gap:14px; border-top:1px solid rgba(201,162,74,0.16); padding-top:18px;">
+                <img src="./assets/geraldo.avif" alt="Geraldo C." loading="lazy" decoding="async" style="width:48px; height:48px; flex-shrink:0; border-radius:50%; object-fit:cover; border:1px solid rgba(201,162,74,0.3);">
+                <div>
+                  <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.06em; color:#E0BD6E;">Geraldo C.</div>
+                  <div style="font-size:15px; font-style:italic; color:rgba(244,235,220,0.55);">aluno · Escola 5D</div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; background:linear-gradient(180deg, rgba(28,18,48,0.5), rgba(15,11,22,0.35)); border:1px solid rgba(201,162,74,0.18); border-radius:10px; padding:30px 28px;">
+              <div style="font-family:'Cormorant Garamond',serif; font-size:48px; line-height:0.6; color:rgba(201,162,74,0.55); margin-bottom:10px;">"</div>
+              <p style="flex:1; font-size:19px; line-height:1.5; color:#F4EBDC; margin:0 0 24px;">Fiz a prática hoje pela manhã e me senti muito bem. Uma sensação de leveza e bem-estar que ficou comigo o resto do dia.</p>
+              <div style="display:flex; align-items:center; gap:14px; border-top:1px solid rgba(201,162,74,0.16); padding-top:18px;">
+                <img src="./assets/adriana.avif" alt="Adriana" loading="lazy" decoding="async" style="width:48px; height:48px; flex-shrink:0; border-radius:50%; object-fit:cover; border:1px solid rgba(201,162,74,0.3);">
+                <div>
+                  <div style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.06em; color:#E0BD6E;">Adriana</div>
+                  <div style="font-size:15px; font-style:italic; color:rgba(244,235,220,0.55);">aluna · Escola 5D</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-reveal="1" style="margin-top:72px;">
+            <div style="text-align:center; font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.24em; color:rgba(244,235,220,0.5); margin-bottom:10px;">NA ÚLTIMA IMERSÃO, AO VIVO</div>
+            <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; line-height:1.4; color:#E0BD6E; margin:0 auto 34px; max-width:620px;">O que elas escreveram no chat enquanto a prática coletiva acontecia.</p>
+
+            <div data-prints="1" style="column-count:4; column-gap:12px;">
+              <img src="./assets/prints/p152528.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152554.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152626.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152656.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152716.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152742.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152807.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152846.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152911.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p152953.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p153022.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p153055.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p143759.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p143823.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p143857.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p143917.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p144043.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p142332.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p142433.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102539.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102706.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102732.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102758.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102817.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p102857.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p103317.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p103512.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p110007.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p110046.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p111256.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p112621.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p114443.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p115636.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p115654.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p115752.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p115808.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p120102.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/p123309.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/image1.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/image2.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/image3.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+              <img src="./assets/prints/image.webp" alt="Depoimento do chat ao vivo da imersão" loading="lazy" decoding="async" style="display:block; width:100%; margin:0 0 12px; border-radius:8px; border:1px solid rgba(201,162,74,0.16); box-shadow:0 10px 26px rgba(0,0,0,0.45);">
+            </div>
+
+            <p style="text-align:center; font-size:15px; line-height:1.5; color:rgba(244,235,220,0.62); margin:26px 0 0;">Prints do chat ao vivo da última imersão.</p>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 6 · COMO FUNCIONA ============ -->
+  <section id="como-funciona" style="position:relative; border-top:1px solid rgba(201,162,74,0.14); background:linear-gradient(180deg, rgba(15,11,22,0), rgba(15,11,22,0.5));">
+    <div style="max-width:1080px; margin:0 auto; padding:110px 40px;">
+      <div data-reveal="1" style="text-align:center; max-width:680px; margin:0 auto 64px;">
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:24px;">COMO FUNCIONA A IMERSÃO</div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:44px; line-height:1.14; margin:0 0 14px; color:#F4EBDC;">Um dia, dois tempos.</h2>
+        <p style="font-size:21px; line-height:1.5; color:rgba(244,235,220,0.68); margin:0;">De manhã, a gente prepara o campo. De tarde, a gente faz o resgate.</p>
+      </div>
+
+      <div data-reveal="1" style="display:flex; align-items:center; gap:16px; margin-bottom:36px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.2em; color:#E0BD6E;">MANHÃ</span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(201,162,74,0.5), transparent);"></span>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:rgba(244,235,220,0.55);">preparação do campo</span>
+      </div>
+      <div data-reveal-group="1" style="display:grid; grid-template-columns:repeat(2,1fr); gap:30px 48px; margin-bottom:72px;">
+        <div style="display:flex; gap:22px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:50px; line-height:0.9; background:linear-gradient(160deg,#ECD9A8,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">01</span>
+          <div><h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#F4EBDC; margin:0 0 8px;">Energia, vibração e frequência</h3><p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.64); margin:0;">O chão de tudo, para você sentir no próprio corpo o que está em jogo.</p></div>
+        </div>
+        <div style="display:flex; gap:22px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:50px; line-height:0.9; background:linear-gradient(160deg,#ECD9A8,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">02</span>
+          <div><h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#F4EBDC; margin:0 0 8px;">Kundalini e potencial energético</h3><p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.64); margin:0;">A força que está parada, e o que a mantém parada.</p></div>
+        </div>
+        <div style="display:flex; gap:22px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:50px; line-height:0.9; background:linear-gradient(160deg,#ECD9A8,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">03</span>
+          <div><h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#F4EBDC; margin:0 0 8px;">Arquétipos e consciência</h3><p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.64); margin:0;">As figuras que operam em você sem pedir licença.</p></div>
+        </div>
+        <div style="display:flex; gap:22px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:50px; line-height:0.9; background:linear-gradient(160deg,#ECD9A8,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">04</span>
+          <div><h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#F4EBDC; margin:0 0 8px;">Física quântica aplicada</h3><p style="font-size:18px; line-height:1.5; color:rgba(244,235,220,0.64); margin:0;">Por que o campo responde, e como, na transformação pessoal.</p></div>
+        </div>
+      </div>
+
+      <div data-reveal="1" style="display:flex; align-items:center; gap:16px; margin-bottom:36px;">
+        <span style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.2em; color:#E0BD6E;">TARDE</span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg, rgba(201,162,74,0.5), transparent);"></span>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; color:rgba(244,235,220,0.55);">o resgate</span>
+      </div>
+      <div data-reveal="1" style="display:flex; gap:26px; align-items:flex-start; background:linear-gradient(135deg, rgba(98,28,49,0.30), rgba(28,18,48,0.40)); border:1px solid rgba(201,162,74,0.25); border-radius:12px; padding:38px 40px; margin-bottom:30px;">
+        <span style="font-family:'Cinzel',serif; font-weight:700; font-size:56px; line-height:0.85; background:linear-gradient(160deg,#ECD9A8,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">05</span>
+        <div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#F4EBDC; margin:0 0 12px;">Prática coletiva guiada</h3>
+          <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.74); margin:0;">Aqui a energia presa volta, com três forças agindo ao mesmo tempo: a egrégora da escola, a sua conexão com o seu Eu Divino, e o campo do grupo.</p>
+        </div>
+      </div>
+      <div data-reveal="1" style="text-align:center; padding:8px 20px;">
+        <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:23px; line-height:1.45; color:#E0BD6E; margin:0;">O que muda tudo: o trabalho não acontece na sua cabeça. Acontece no campo, com o corpo, ao vivo — dentro de um campo coletivo que sozinha você não consegue gerar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 7 · PARA QUEM É ============ -->
+  <section style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:1000px; margin:0 auto; padding:104px 40px;">
+      <div data-reveal="1" style="text-align:center; margin-bottom:54px;">
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:22px;">PARA QUEM É, E PARA QUEM NÃO É</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:28px; line-height:1.35; color:#F4EBDC; margin:0; max-width:680px; margin-left:auto; margin-right:auto;">Esta não é mais uma aula sobre a sua vida. É um trabalho no seu campo, ao vivo.</p>
+      </div>
+      <div data-reveal-group="1" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <div style="background:linear-gradient(180deg, rgba(40,16,24,0.5), rgba(15,11,22,0.3)); border:1px solid rgba(138,45,82,0.3); border-radius:12px; padding:40px;">
+          <h3 style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:0.1em; color:#C9577E; margin:0 0 26px;">NÃO É PARA VOCÊ SE</h3>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <p style="font-size:19px; line-height:1.45; color:rgba(244,235,220,0.66); margin:0; padding-left:22px; border-left:1px solid rgba(138,45,82,0.5);">Você quer só mais uma teoria para guardar na estante.</p>
+            <p style="font-size:19px; line-height:1.45; color:rgba(244,235,220,0.66); margin:0; padding-left:22px; border-left:1px solid rgba(138,45,82,0.5);">Você quer fórmula pronta e não pretende entrar no trabalho.</p>
+            <p style="font-size:19px; line-height:1.45; color:rgba(244,235,220,0.66); margin:0; padding-left:22px; border-left:1px solid rgba(138,45,82,0.5);">Você não pode estar ao vivo. A energia volta na prática coletiva, e a prática é ao vivo.</p>
+          </div>
+        </div>
+        <div style="background:linear-gradient(180deg, rgba(40,30,12,0.5), rgba(15,11,22,0.3)); border:1px solid rgba(201,162,74,0.35); border-radius:12px; padding:40px;">
+          <h3 style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:0.1em; color:#E0BD6E; margin:0 0 26px;">É PARA VOCÊ SE</h3>
+          <div style="display:flex; flex-direction:column; gap:18px;">
+            <p style="font-size:19px; line-height:1.45; color:#F4EBDC; margin:0; padding-left:22px; border-left:1px solid rgba(201,162,74,0.6);">Você já percebeu que repete, já tentou mudar pela cabeça, e o padrão voltou.</p>
+            <p style="font-size:19px; line-height:1.45; color:#F4EBDC; margin:0; padding-left:22px; border-left:1px solid rgba(201,162,74,0.6);">Você quer chegar no nível que terapia e curso de mentalidade não alcançam.</p>
+            <p style="font-size:19px; line-height:1.45; color:#F4EBDC; margin:0; padding-left:22px; border-left:1px solid rgba(201,162,74,0.6);">Você sente que tem força sua presa em algum lugar, e quer de volta.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 8 · CRONOGRAMA (SEÇÃO CLARA) ============ -->
+  <section style="position:relative; background:linear-gradient(165deg, #F5EAD2 0%, #ECD8AC 100%);">
+    
+  <div data-reveal="1" style="max-width:780px; margin:0 auto; padding:104px 40px;">
+      <div style="text-align:center; margin-bottom:46px;">
+        <div style="display:inline-flex; align-items:center; gap:12px; margin-bottom:18px;">
+          <span style="width:26px; height:1px; background:#9C7B33;"></span>
+          <span style="font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.26em; color:#9C7B33;">PROGRAMA DO DIA</span>
+          <span style="width:26px; height:1px; background:#9C7B33;"></span>
+        </div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:44px; margin:0 0 6px; color:#2A1620;">Cronograma · 26 de setembro</h2>
+        <p style="font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.18em; color:#9C7B33; margin:6px 0 0;">9H ÀS 16H</p>
+      </div>
+      <div style="border:1px solid rgba(154,123,58,0.45); border-radius:6px; padding:14px 40px; background:rgba(255,255,255,0.35); box-shadow:inset 0 0 0 4px rgba(154,123,58,0.12);">
+        <div style="display:flex; align-items:baseline; gap:28px; padding:24px 0; border-bottom:1px solid rgba(154,123,58,0.3);">
+          <span style="font-size:22px; line-height:1;">🕘</span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:20px; color:#9C7B33; min-width:84px;">09h00</span>
+          <span style="font-size:22px; color:#2A1620;">Início, preparação do campo</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:28px; padding:24px 0; border-bottom:1px solid rgba(154,123,58,0.3);">
+          <span style="font-size:22px; line-height:1;">🕛</span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:20px; color:#9C7B33; min-width:84px;">12h00</span>
+          <span style="font-size:22px; color:rgba(42,22,32,0.6);">Intervalo</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:28px; padding:24px 0; border-bottom:1px solid rgba(154,123,58,0.3);">
+          <span style="font-size:22px; line-height:1;">🕜</span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:20px; color:#9C7B33; min-width:84px;">13h30</span>
+          <span style="font-size:22px; color:#2A1620;">Retorno, prática coletiva de resgate</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:28px; padding:24px 0;">
+          <span style="font-size:22px; line-height:1;">🕓</span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:20px; color:#9C7B33; min-width:84px;">16h00</span>
+          <span style="font-size:22px; color:#2A1620;">Encerramento</span>
+        </div>
+      </div>
+      <p style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:rgba(42,22,32,0.7); margin:36px 0 0;">O Equinócio de primavera é a melhor janela para esse trabalho. O que estava adormecido volta a se mover, e isso joga a favor.</p>
+    </div></section>
+
+  <!-- ============ BLOCO 9 · QUANTO CUSTA ============ -->
+  <section id="investimento" style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:1000px; margin:0 auto; padding:110px 40px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;">
+      <div data-reveal="1">
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:22px;">QUANTO CUSTA</div>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.74); margin:0 0 20px;">A sessão individual com o Hamad custa <span style="color:#E0BD6E;">R$500</span>. Ali o trabalho é inteiro para uma pessoa só. Não cabe na agenda atender individualmente todo mundo que precisa disso — por isso existe a experiência coletiva.</p>
+        <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.6); margin:0;">A imersão não substitui a sessão individual e não inclui atendimento individual. É esse o motivo real do formato em grupo, e é o que segura o preço lá embaixo sem ser desconto vazio.</p>
+      </div>
+      <div data-reveal="1" data-ticket="1" style="position:relative; filter:drop-shadow(0 30px 50px rgba(0,0,0,0.55));">
+
+        <div style="border-radius:14px 14px 0 0; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 100%, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 100%, transparent 13px, #000 13.5px); mask-composite:intersect;">
+
+        <div style="background:linear-gradient(100deg,#8A2D52,#621C31 60%,#4E1626); padding:16px 26px; display:flex; align-items:center; justify-content:space-between; gap:14px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11.5px; letter-spacing:0.18em; color:#F4EBDC;">INGRESSO · LOTE 02</span>
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:11.5px; letter-spacing:0.14em; color:rgba(244,235,220,0.65);">RDF-26</span>
+        </div>
+
+        <div style="background:#F5EAD2; padding:26px 26px 24px;">
+          <div style="display:grid; grid-template-columns:auto auto 1fr; gap:10px 26px; align-items:start;">
+            <div>
+              <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:7px; min-height:14px; white-space:nowrap;">DATA</div>
+              <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:24px; line-height:1; color:#2A1620; white-space:nowrap;">26 set</div>
+            </div>
+            <div>
+              <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:7px; min-height:14px; white-space:nowrap;">HORÁRIO</div>
+              <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:24px; line-height:1; color:#2A1620; white-space:nowrap;">9h às 16h</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.18em; color:#9C7B33; margin-bottom:7px; min-height:14px; white-space:nowrap;">FORMATO</div>
+              <div style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:24px; line-height:1; color:#2A1620; white-space:nowrap;">Online, ao vivo</div>
+            </div>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:15px; color:rgba(42,22,32,0.55); margin-top:12px;">Horário de Brasília</div>
+        </div>
+      </div>
+
+      <div style="border-radius:0 0 14px 14px; overflow:hidden; -webkit-mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 13px at 0 0, transparent 13px, #000 13.5px), radial-gradient(circle 13px at 100% 0, transparent 13px, #000 13.5px); mask-composite:intersect;">
+
+        <div style="background:#F5EAD2; padding:0 26px;">
+          <div style="border-top:2px dashed rgba(154,123,58,0.55);"></div>
+        </div>
+
+        <div style="background:#F5EAD2; padding:26px 26px 30px; text-align:center;">
+          <div style="font-size:16px; color:rgba(42,22,32,0.5); text-decoration:line-through; margin-bottom:10px;">Valor original R$197</div>
+          <div style="display:flex; align-items:baseline; justify-content:center; gap:5px;">
+            <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:34px; color:#2A1620;">R$</span>
+            <span data-count="35" style="font-family:'Cinzel',serif; font-weight:800; font-size:76px; line-height:0.9; color:#2A1620;">35</span>
+            <span style="font-family:'Cinzel',serif; font-weight:700; font-size:24px; color:#8A2D52;">,00</span>
+            <span style="font-family:'Cormorant Garamond',serif; font-size:21px; color:rgba(42,22,32,0.55); margin-left:6px;">à vista</span>
+          </div>
+          <div style="display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:9px 20px; border-radius:999px; border:1px solid rgba(154,123,58,0.5); background:rgba(255,255,255,0.45);">
+            <span style="font-family:'Cormorant Garamond',serif; font-size:17px; color:rgba(42,22,32,0.7);">pagamento único ·</span>
+            <span style="font-family:'Cinzel',serif; font-weight:700; font-size:12px; letter-spacing:0.08em; color:#2A1620;">ACESSO NO DIA</span>
+          </div>
+        </div>
+
+        <div style="background:#EADDBE; padding:22px 26px 24px;">
+          <a href="{{ checkoutUrl }}" style="display:flex; align-items:center; justify-content:center; gap:11px; padding:20px; border-radius:8px; background:linear-gradient(120deg,#ECD9A8,#C9A24A 55%,#B8893A); color:#1A0E16; font-family:'Cinzel',serif; font-weight:700; font-size:15px; letter-spacing:0.06em; text-decoration:none; box-shadow:0 8px 22px rgba(120,86,26,0.35);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>COMPRAR MEU INGRESSO</a>
+
+          <div style="margin-top:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-family:'Cinzel',serif; font-weight:700; font-size:10px; letter-spacing:0.1em; color:#A81E22;">99% VENDIDOS</span>
+              <span style="font-family:'Cinzel',serif; font-weight:700; font-size:10px; letter-spacing:0.1em; color:rgba(42,22,32,0.55);">LOTE DOIS</span>
+            </div>
+            <div style="height:7px; border-radius:999px; background:rgba(42,22,32,0.14); overflow:hidden;">
+              <div data-bar="1" data-target="99" style="height:100%; width:99%; border-radius:999px; background:linear-gradient(90deg,#7A1220,#C02A24 55%,#F0562E); "></div>
+            </div>
+          </div>
+
+          <p style="font-size:15px; line-height:1.45; color:rgba(42,22,32,0.62); margin:16px 0 0; text-align:center;">Vaga individual. O lote dois garante a sua participação ao vivo no dia.</p>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <!-- ============ GARANTIA ============ -->
+  <section style="position:relative; border-top:1px solid rgba(201,162,74,0.14); background:radial-gradient(800px 520px at 22% 50%, rgba(98,28,49,0.28), transparent 62%);">
+    <div data-reveal="1" style="max-width:1020px; margin:0 auto; padding:100px 40px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center;">
+      <div style="position:relative; display:flex; justify-content:center;">
+        <div style="position:absolute; inset:-8%; background:radial-gradient(circle, rgba(201,162,74,0.28), transparent 68%); animation:rfGlow 6s ease-in-out infinite;"></div>
+        <img src="./assets/selo-garantia.webp" loading="lazy" decoding="async" alt="Selo de Garantia · Qualidade · Autenticidade · Propósito" style="position:relative; width:100%; max-width:340px; animation:rfFloat 7s ease-in-out infinite; filter:drop-shadow(0 24px 50px rgba(0,0,0,0.6));">
+      </div>
+      <div>
+        <div style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E; margin-bottom:22px;">SELO DE GARANTIA</div>
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:42px; line-height:1.14; margin:0 0 24px; color:#F4EBDC;">Comprei e não vou conseguir participar.</h2>
+        <p style="font-size:21px; line-height:1.6; color:rgba(244,235,220,0.76); margin:0;">Se você comprou e descobriu que não vai conseguir estar no dia 26, escreve para a gente em até <span style="color:#E0BD6E;">2 dias antes do evento</span> e devolvemos o valor. Sem letra miúda. Eu prefiro te devolver o seu dinheiro do que te entregar metade de um trabalho que pede você <em style="font-style:italic; color:#E0BD6E;">inteira presente.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BIO · QUEM ESTÁ TE GUIANDO ============ -->
+  <section style="position:relative; border-top:1px solid rgba(201,162,74,0.14); background:radial-gradient(900px 560px at 78% 40%, rgba(232,103,43,0.14), transparent 60%); overflow:hidden;">
+    <div data-bio-grid="1" style="max-width:1080px; margin:0 auto; padding:104px 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;">
+      <div data-reveal="1" data-bio-text="1">
+        <div style="display:inline-flex; align-items:center; gap:13px; margin-bottom:24px;">
+          <span style="display:inline-block; width:34px; height:1px; background:linear-gradient(90deg, transparent, #C9A24A);"></span>
+          <span style="font-family:'Cinzel',serif; font-size:11.5px; letter-spacing:0.28em; color:#D9BE7E;">QUEM ESTÁ TE GUIANDO</span>
+        </div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:30px; line-height:1.35; color:#F4EBDC; margin:0 0 24px; font-weight:500;">Eu não nasci diferente de você.</p>
+        <p style="font-size:20px; line-height:1.6; color:rgba(244,235,220,0.74); margin:0 0 18px;">Aos 13 anos, rompi com a religião que dizia que eu era pecador, que eu não merecia, que Deus estava fora de mim. Fiquei completamente sozinho. Sem saber quem eu era.</p>
+        <p style="font-size:20px; line-height:1.6; color:rgba(244,235,220,0.74); margin:0 0 18px;">Até encontrar uma tecnologia que chegou onde nada mais havia chegado. Não no meu pensamento. <span style="color:#E0BD6E;">No meu campo.</span></p>
+        <p style="font-size:20px; line-height:1.6; color:rgba(244,235,220,0.74); margin:0 0 26px;">Hoje, minha missão é uma só: guiar mulheres de volta para si mesmas. Não porque eu sou especial. Mas porque eu estava onde você está.</p>
+        <div style="display:flex; align-items:stretch; gap:18px;">
+          <span style="flex-shrink:0; width:3px; border-radius:999px; background:linear-gradient(180deg,#ECD9A8,#A9803A); box-shadow:0 0 14px rgba(201,162,74,0.5);"></span>
+          <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; line-height:1.35; color:#E0BD6E; margin:0;">E encontrei o caminho de volta.</p>
+        </div>
+        <div style="margin-top:34px; display:flex; align-items:baseline; gap:14px;">
+          <span style="font-family:'Cinzel',serif; font-weight:700; font-size:20px; letter-spacing:0.14em; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#9C7B33); -webkit-background-clip:text; background-clip:text; color:transparent;">HAMAD</span>
+          <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:rgba(244,235,220,0.5);">Instituto Mundos Entrelaçados</span>
+        </div>
+      </div>
+      <div data-reveal="1" data-bio-photo="1" style="position:relative; display:flex; justify-content:center;">
+        <div style="position:absolute; inset:-10%; background:radial-gradient(circle at 50% 40%, rgba(232,103,43,0.28), rgba(98,28,49,0.18) 55%, transparent 75%); animation:rfGlow 6s ease-in-out infinite;"></div>
+        <div style="position:relative; border-radius:10px; overflow:hidden; border:1px solid rgba(201,162,74,0.35); box-shadow:0 30px 70px rgba(0,0,0,0.55);">
+          <img src="./assets/hamad-bio.webp" alt="Hamad" loading="lazy" decoding="async" style="display:block; width:100%; max-width:400px;">
+          <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,10,16,0.12), transparent 30%, transparent 70%, rgba(11,10,16,0.55)); pointer-events:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 10/11/12 · OBJEÇÕES ============ -->
+  <section style="position:relative; background:linear-gradient(180deg, rgba(15,11,22,0.5), rgba(15,11,22,0));">
+    <div style="max-width:880px; margin:0 auto; padding:100px 40px; display:flex; flex-direction:column; gap:64px;">
+      <div data-reveal="1">
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:36px; line-height:1.2; margin:0 0 20px; color:#F4EBDC;">E se eu não puder estar ao vivo?</h2>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">Vou ser direto. O ao vivo é o coração do trabalho, porque a energia volta na prática coletiva, dentro do campo do grupo. Se você puder estar, esteja.</p>
+      </div>
+      <div data-reveal="1" style="border-top:1px solid rgba(201,162,74,0.16); padding-top:56px;">
+        <h2 style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:34px; line-height:1.25; margin:0 0 20px; color:#E0BD6E;">"Já tentei de tudo." Eu sei. É por isso que isso é diferente.</h2>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0 0 14px;">Você não está aqui por falta de esforço. Já leu, já fez terapia, já tentou mudar pela cabeça. Tudo isso trabalha num nível. O fractal preso está em outro.</p>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">A diferença não é mais conteúdo. É o lugar onde o trabalho acontece: no campo, com o corpo, ao vivo, dentro de um campo coletivo. É exatamente o nível que tudo que você já fez não tocou.</p>
+      </div>
+      <div data-reveal="1" style="border-top:1px solid rgba(201,162,74,0.16); padding-top:56px;">
+        <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:36px; line-height:1.2; margin:0 0 20px; color:#F4EBDC;">Como saber se é a sua hora</h2>
+        <p style="font-size:20px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0;">É a sua hora se você se vê repetindo o mesmo padrão e já cansou de tentar resolver isso só pensando. Se o cansaço não passa com sono. Se você sente que tem força sua parada em algum lugar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 13 · FAQ ============ -->
+  <section id="faq" style="position:relative; border-top:1px solid rgba(201,162,74,0.14);">
+    <div style="max-width:1080px; margin:0 auto; padding:104px 40px; display:grid; grid-template-columns:0.7fr 1.3fr; gap:56px; align-items:start;">
+      <div data-reveal="1" style="position:sticky; top:96px;">
+        <h2 style="font-family:'Cinzel',serif; font-weight:700; font-size:64px; letter-spacing:0.02em; margin:0; background:linear-gradient(150deg,#ECD9A8,#C9A24A 60%,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">FAQ.</h2>
+        <p style="font-size:19px; line-height:1.5; color:rgba(244,235,220,0.6); margin:18px 0 0;">As dúvidas mais comuns antes de garantir a sua vaga no lote dois.</p>
+      </div>
+      <div data-reveal-group="1" style="display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div onClick="{{ f.toggle }}" style="background:linear-gradient(180deg, rgba(28,18,48,0.5), rgba(15,11,22,0.3)); border:1px solid rgba(201,162,74,0.2); border-radius:10px; padding:26px 30px; cursor:pointer;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:20px;">
+              <span style="font-family:'Cormorant Garamond',serif; font-weight:600; font-size:22px; color:#F4EBDC;">{{ f.q }}</span>
+              <span style="flex-shrink:0; width:30px; height:30px; border-radius:50%; background:linear-gradient(120deg,#ECD9A8,#C9A24A); color:#1A0E16; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:700;">{{ f.sign }}</span>
+            </div>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <p style="font-size:19px; line-height:1.55; color:rgba(244,235,220,0.7); margin:16px 0 0;">{{ f.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BLOCO 14 · CHAMADA FINAL ============ -->
+  <section style="position:relative; overflow:hidden; border-top:1px solid rgba(201,162,74,0.2);">
+    <div style="position:absolute; inset:0; width:100%; height:100%; background-image:url('./assets/cta-still.webp'); background-size:cover; background-position:center; z-index:0;"></div>
+    <div style="position:absolute; inset:0; z-index:1; background:radial-gradient(900px 600px at 50% 60%, rgba(98,28,49,0.45), transparent 65%), linear-gradient(180deg, rgba(11,10,16,0.86), rgba(11,10,16,0.72) 45%, rgba(11,10,16,0.9));"></div>
+    <div data-reveal="1" style="position:relative; z-index:2; max-width:840px; margin:0 auto; padding:120px 40px 100px; text-align:center;">
+      <div style="position:relative; display:inline-block; margin-bottom:34px;">
+        <div style="position:absolute; inset:-40%; background:radial-gradient(circle, rgba(201,162,74,0.3), transparent 70%); animation:rfGlow 5s ease-in-out infinite;"></div>
+        
+      </div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:52px; line-height:1.12; margin:0 0 26px; color:#F4EBDC;">A sua energia está esperando <em style="font-style:italic; background:linear-gradient(120deg,#ECD9A8,#C9A24A 60%,#A9803A); -webkit-background-clip:text; background-clip:text; color:transparent;">para voltar.</em></h2>
+      <p style="font-size:21px; line-height:1.55; color:rgba(244,235,220,0.72); margin:0 0 44px; max-width:620px; margin-left:auto; margin-right:auto;">Você pode seguir trocando o lado de fora e reencontrando o mesmo nó. Ou pode, no dia 26, ir buscar de volta a força que ficou presa no caminho.</p>
+      <a href="{{ checkoutUrl }}" style="display:inline-flex; align-items:center; gap:13px; padding:24px 48px; border-radius:999px; background:linear-gradient(120deg,#ECD9A8,#C9A24A 55%,#B8893A); color:#1A0E16; font-family:'Cinzel',serif; font-weight:700; font-size:16px; letter-spacing:0.06em; text-decoration:none; animation:rfPulse 3.4s ease-in-out infinite;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="19" height="19" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>QUERO RESGATAR MINHA ENERGIA · LOTE DOIS R$35</a>
+      <div style="width:100%; max-width:420px; margin:30px auto 0;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:9px;">
+          <span style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.12em; color:#F0725A;">99% DOS INGRESSOS VENDIDOS</span>
+          <span style="font-family:'Cinzel',serif; font-size:10.5px; letter-spacing:0.12em; color:rgba(244,235,220,0.6);">A R$35</span>
+        </div>
+        <div style="height:8px; border-radius:999px; background:rgba(244,235,220,0.12); overflow:hidden;">
+          <div data-bar="1" data-target="99" style="height:100%; width:99%; border-radius:999px; background:linear-gradient(90deg,#7A1220,#C02A24 55%,#F0562E); box-shadow:0 0 16px rgba(224,60,40,0.55);"></div>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative; z-index:2; border-top:1px solid rgba(201,162,74,0.16); background:rgba(11,10,16,0.5); backdrop-filter:blur(4px);">
+      <div style="max-width:1080px; margin:0 auto; padding:36px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+        <span style="font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.18em; color:rgba(244,235,220,0.5);">RESGATE DE FRACTAIS DO INFERNO</span>
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:rgba(244,235,220,0.42);">Instituto Mundos Entrelaçados · Sob o amor da Deusa</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280},&quot;checkoutUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://pay.kiwify.com.br/YbVxqxn&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showProof&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { open: 0, alertDismissed: false, pastHero: false };
+  faqData = [
+    { q: 'É ao vivo ou gravado?', a: 'Ao vivo, no dia 26 de setembro. O lote dois é para participar ao vivo. A gravação é um acesso separado, oferecido depois do evento.' },
+    { q: 'Preciso entender de espiritualidade para acompanhar?', a: 'Não. Se você já vive essa linguagem, vai se sentir em casa. Se não vive, a manhã te prepara para a tarde sem exigir repertório.' },
+    { q: 'Funciona online?', a: 'Sim. O campo coletivo se forma com as pessoas conectadas ao vivo. Não depende de estar na mesma sala física.' },
+    { q: 'E se eu não conseguir participar no dia?', a: 'O lote dois é só para o ao vivo. Quem não puder estar pode pegar a gravação completa depois, por um valor à parte.' },
+    { q: 'A imersão substitui a sessão individual com o Hamad?', a: 'Não. São coisas diferentes. A imersão é um trabalho coletivo. A sessão individual é um atendimento um a um, com outro preço e outra agenda.' },
+    { q: 'Como recebo o acesso?', a: 'Depois da compra, você recebe as instruções de acesso pelo mesmo canal do seu cadastro.' }
+  ];
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const hero = document.querySelector('#topo');
+      const past = hero ? window.scrollY > hero.offsetTop + hero.offsetHeight : window.scrollY > window.innerHeight;
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    this._tries = 0;
+    const init = () => {
+      const g = window.gsap;
+      const ST = window.ScrollTrigger;
+      if (!g || !ST) {
+        if (this._tries++ < 40) { this._t = setTimeout(init, 80); }
+        return;
+      }
+      g.registerPlugin(ST);
+
+      // Hero intro timeline
+      const tl = g.timeline({ defaults: { ease: 'power3.out' } });
+      g.set('[data-nav]', { opacity: 0 });
+      tl.to('[data-nav]', { opacity: 1, duration: 0.7 }, 0);
+      tl.from('[data-hero-bg]', { opacity: 0, scale: 1.08, duration: 1.4, ease: 'power2.out' }, 0);
+      tl.from('[data-hero-el]', { opacity: 0, y: 28, duration: 0.9, stagger: 0.12 }, 0.25);
+
+      // Section 2 — "Você se reconhece" choreographed reveal
+      const s2 = document.querySelector('[data-s2]');
+      if (s2) {
+        const img = s2.querySelector('[data-s2-img]');
+        const frame = s2.querySelector('[data-s2-frame]');
+        const lines = s2.querySelectorAll('[data-s2-line]');
+        const bar = s2.querySelector('[data-s2-bar]');
+        const accent = s2.querySelector('[data-s2-accent]');
+        g.set(frame, { clipPath: 'inset(0% 0% 100% 0%)' });
+        g.set(img, { opacity: 0, scale: 1.06 });
+        g.set(lines, { opacity: 0, y: 26 });
+        g.set(bar, { scaleX: 0 });
+        g.set(accent, { scaleY: 0 });
+        const t2 = g.timeline({ defaults: { ease: 'power3.out' },
+          scrollTrigger: { trigger: s2, start: 'top 72%' } });
+        t2.to(img, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' }, 0)
+          .to(frame, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.1, ease: 'power4.out' }, 0)
+          .to(lines, { opacity: 1, y: 0, duration: 0.8, stagger: 0.14 }, 0.35)
+          .to(bar, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, 0.45)
+          .to(accent, { scaleY: 1, duration: 0.7, ease: 'power2.out' }, 0.9);
+        // gentle parallax on the portrait
+        g.to(img, { y: -46, ease: 'none',
+          scrollTrigger: { trigger: s2, start: 'top bottom', end: 'bottom top', scrub: true } });
+      }
+
+      // Section reveals
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        g.from(el, { opacity: 0, y: 44, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 85%' } });
+      });
+
+      // Staggered groups
+      document.querySelectorAll('[data-reveal-group]').forEach((grp) => {
+        g.from(grp.children, { opacity: 0, y: 32, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+          scrollTrigger: { trigger: grp, start: 'top 82%' } });
+      });
+
+      // Progress bars fill
+      document.querySelectorAll('[data-bar]').forEach((bar) => {
+        const t = bar.getAttribute('data-target') || '75';
+        g.fromTo(bar, { width: '0%' }, { width: t + '%', duration: 1.5, ease: 'power2.out',
+          scrollTrigger: { trigger: bar, start: 'top 92%' } });
+      });
+
+      // Number count-up
+      document.querySelectorAll('[data-count]').forEach((el) => {
+        const end = parseFloat(el.getAttribute('data-count')) || 0;
+        const o = { v: 0 };
+        g.to(o, { v: end, duration: 1.6, ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: 'top 92%' },
+          onUpdate: () => { el.textContent = Math.round(o.v); } });
+      });
+
+      // Background parallax
+      g.to('[data-hero-bg]', { y: 80, scale: 1.06, ease: 'none',
+        scrollTrigger: { trigger: '#topo', start: 'top top', end: 'bottom top', scrub: true } });
+
+      ST.refresh();
+      window.addEventListener('load', () => ST.refresh());
+
+      // Watchdog: if rAF never ticks (offscreen / background tab), never leave content hidden.
+      setTimeout(() => {
+        if (tl.progress() === 0) {
+          g.set('[data-nav],[data-hero-el],[data-hero-bg],[data-reveal],[data-s2-img],[data-s2-line],[data-s2-bar],[data-s2-accent]', { clearProps: 'opacity,transform,scale' });
+          g.set('[data-s2-frame]', { clearProps: 'clipPath' });
+          document.querySelectorAll('[data-reveal-group]').forEach((grp) =>
+            g.set(grp.children, { clearProps: 'opacity,transform' }));
+          document.querySelectorAll('[data-bar]').forEach((b) =>
+            g.set(b, { width: (b.dataset.target || '100') + '%' }));
+          document.querySelectorAll('[data-count]').forEach((el) => {
+            el.textContent = el.getAttribute('data-count');
+          });
+        }
+      }, 2200);
+    };
+    init();
+  }
+
+  componentWillUnmount() {
+    if (this._t) clearTimeout(this._t);
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+  }
+
+  renderVals() {
+    const open = this.state.open;
+    const faqs = this.faqData.map((f, i) => ({
+      q: f.q,
+      a: f.a,
+      open: open === i,
+      sign: open === i ? '\u2013' : '+',
+      toggle: () => this.setState((s) => ({ open: s.open === i ? -1 : i }))
+    }));
+    return {
+      faqs,
+      alertVisible: !this.state.alertDismissed,
+      dismissAlert: () => this.setState({ alertDismissed: true }),
+      checkoutUrl: this.props.checkoutUrl ?? 'https://pay.kiwify.com.br/YbVxqxn',
+      showProof: this.props.showProof ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>

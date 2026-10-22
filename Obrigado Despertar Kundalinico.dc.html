@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Atelier Fleur';src:url('./assets/fonts/Atelier-Fleur-Bold.otf') format('opentype');font-weight:100 900;font-style:normal;font-display:swap}
+  @font-face{font-family:'Atelier Fleur';src:url('./assets/fonts/Atelier-Fleur-Italic.otf') format('opentype');font-weight:100 900;font-style:italic;font-display:swap}
+  body { margin:0; background:#1C0A16; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#F6A9CB; } a:hover { color:#FCEEF3; }
+  @keyframes tyIn { from { opacity:0; transform:translateY(18px) } to { opacity:1; transform:none } }
+  @keyframes tyPop { 0% { transform:scale(.4); opacity:0 } 70% { transform:scale(1.08); opacity:1 } 100% { transform:scale(1) } }
+  @keyframes tyRing { 0% { transform:scale(.9); opacity:.7 } 100% { transform:scale(1.9); opacity:0 } }
+  @keyframes tyStamp { 0% { transform:rotate(-14deg) scale(1.8); opacity:0 } 100% { transform:rotate(-14deg) scale(1); opacity:.92 } }
+  [data-in] { opacity:0; animation:tyIn .8s cubic-bezier(.22,.8,.3,1) forwards; }
+  [data-in="1"]{animation-delay:.05s} [data-in="2"]{animation-delay:.2s} [data-in="3"]{animation-delay:.35s} [data-in="4"]{animation-delay:.5s} [data-in="5"]{animation-delay:.65s} [data-in="6"]{animation-delay:.8s}
+  .ty-cta { transition:transform .2s ease, box-shadow .3s ease, filter .3s ease; }
+  .ty-cta:hover { filter:brightness(1.06); transform:translateY(-1px); }
+  .ty-cta:active { transform:scale(.985); }
+  @media (max-width:760px) {
+    [data-split] { grid-template-columns:1fr !important; }
+    [data-ticket] { flex-direction:column !important; }
+    [data-ticket-b] { width:100% !important; border-left:0 !important; border-top:2px dashed rgba(28,10,22,.28) !important; border-radius:0 0 12px 12px !important; }
+    [data-ticket-a] { border-radius:12px 12px 0 0 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { [data-in] { opacity:1 !important; animation:none !important; } }
+</style>
+</helmet>
+<div style="position:relative; min-height:100vh; background:radial-gradient(900px 620px at 50% -6%, rgba(246,169,203,.22), transparent 62%), radial-gradient(760px 600px at 100% 100%, rgba(77,18,51,.7), transparent 60%), #1C0A16; color:#FCEEF3; font-family:'Hanken Grotesk',system-ui,sans-serif; overflow-x:hidden;">
+
+  <!-- TOPO -->
+  <div style="border-bottom:1px solid rgba(252,238,243,.1);">
+    <div style="max-width:1080px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(18px,4.4vw,22px); line-height:1;">Resgate de <em>Fractais</em></span>
+      <div style="display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:rgba(252,238,243,.6);">
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; border-radius:50%; background:#F6A9CB; color:#1C0A16; font-size:11px;">✓</span>
+        <span>COMPRA CONFIRMADA</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRMAÇÃO -->
+  <section data-screen-label="Confirmação" style="padding:clamp(52px,9vw,96px) 22px clamp(36px,6vw,56px);">
+    <div style="max-width:760px; margin:0 auto; text-align:center;">
+      <div data-in="1" style="position:relative; width:74px; height:74px; margin:0 auto clamp(24px,4vw,32px);">
+        <span aria-hidden="true" style="position:absolute; inset:0; border-radius:50%; border:1px solid #F6A9CB; animation:tyRing 2.4s ease-out infinite;"></span>
+        <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#F6A9CB; color:#1C0A16; box-shadow:0 0 40px rgba(246,169,203,.45); animation:tyPop .7s cubic-bezier(.3,1.5,.5,1) .1s both;"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+      </div>
+      <div data-in="2" style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; color:#F2C77A; margin-bottom:16px;">IMERSÃO RESGATE DE FRACTAIS · DESPERTAR KUNDALÍNICO</div>
+      <h1 data-in="3" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(38px,8vw,72px); line-height:1; letter-spacing:-.015em; margin:0 0 clamp(18px,3vw,24px);">Sua vaga está <em style="color:#F6A9CB;">confirmada.</em></h1>
+      <p data-in="4" style="font-size:clamp(17px,4vw,20px); line-height:1.6; color:rgba(252,238,243,.84); margin:0 auto; max-width:34em;">Você vai estar na sala no dia do resgate. A energia que ficou presa vai ter pra onde voltar.</p>
+    </div>
+
+    <!-- TICKET -->
+    <div data-in="5" data-ticket="1" style="max-width:640px; margin:clamp(36px,6vw,52px) auto 0; display:flex; filter:drop-shadow(0 26px 44px rgba(0,0,0,.5));">
+      <div data-ticket-a="1" style="flex:1; min-width:0; background:#FCEEF3; color:#1C0A16; padding:22px 24px; border-radius:12px 0 0 12px;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#A8457A; margin-bottom:14px;">INGRESSO · 2 DIAS AO VIVO</div>
+        <div style="display:grid; grid-template-columns:repeat(3,auto); gap:14px 24px; justify-content:start;">
+          <div><div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#A8457A; margin-bottom:6px;">DATA</div><div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:22px; line-height:1;">{{ eventDate }}</div></div>
+          <div><div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#A8457A; margin-bottom:6px;">HORÁRIO</div><div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:22px; line-height:1;">{{ eventTime }}</div></div>
+          <div><div style="font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.16em; color:#A8457A; margin-bottom:6px;">FORMATO</div><div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:22px; line-height:1;">Online, ao vivo</div></div>
+        </div>
+      </div>
+      <div data-ticket-b="1" style="position:relative; width:190px; flex-shrink:0; background:#F6A9CB; color:#1C0A16; padding:20px; border-left:2px dashed rgba(28,10,22,.28); border-radius:0 12px 12px 0; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <div style="padding:8px 14px; border:2px solid #1C0A16; border-radius:4px; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:14px; letter-spacing:.2em; animation:tyStamp .5s cubic-bezier(.3,1.4,.5,1) 1.1s both;">CONFIRMADO</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASSO 1 · GRUPO -->
+  <section data-screen-label="Grupo" style="padding:clamp(20px,4vw,36px) 22px clamp(56px,9vw,90px);">
+    <div data-in="6" style="position:relative; max-width:760px; margin:0 auto; padding:clamp(28px,5vw,46px); border:1px solid rgba(246,169,203,.42); background:linear-gradient(170deg, rgba(246,169,203,.12), rgba(28,10,22,.2) 70%); border-radius:4px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:#1C0A16; background:#F2C77A; padding:5px 10px; border-radius:2px;">PASSO 1</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:rgba(252,238,243,.6);">OBRIGATÓRIO</span>
+      </div>
+      <h2 style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(28px,5.8vw,44px); line-height:1.08; margin:0 0 16px;">A única coisa que você precisa fazer <em style="color:#F6A9CB;">agora</em></h2>
+      <p style="font-size:clamp(17px,4vw,19px); font-weight:500; line-height:1.55; color:#FCEEF3; margin:0 0 12px;">Entra no grupo do WhatsApp.</p>
+      <p style="font-size:clamp(16px,3.8vw,18px); line-height:1.62; color:rgba(252,238,243,.8); margin:0 0 clamp(26px,4vw,32px); max-width:38em;">É lá que cai o link de acesso à imersão, o aviso de quando começar e tudo que você precisa no dia. Sem o grupo, você corre o risco de perder o início.</p>
+      <a href="{{ groupUrl }}" target="_blank" rel="noopener" class="ty-cta" style="display:flex; align-items:center; justify-content:center; gap:12px; width:100%; padding:20px 24px; border-radius:2px; background:#25D366; color:#0B2A17; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:clamp(12.5px,3.2vw,14px); letter-spacing:.12em; text-decoration:none; box-shadow:0 14px 34px rgba(37,211,102,.28);"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true" style="flex-shrink:0;"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zM12.04 21.5h-.01a9.43 9.43 0 0 1-4.8-1.31l-.35-.2-3.57.93.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.44 9.43zm8.03-17.47A11.28 11.28 0 0 0 12.04.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.95 1.52 5.67L.58 23.3l5.7-1.5a11.33 11.33 0 0 0 5.75 1.47h.01c6.26 0 11.36-5.1 11.36-11.36 0-3.04-1.18-5.89-3.33-8.04z"></path></svg>QUERO ENTRAR NO GRUPO DA IMERSÃO</a>
+    </div>
+  </section>
+
+  <!-- PASSO 2 · GRAVAÇÃO -->
+  <section data-screen-label="Gravação" style="background:#FCEEF3; color:#1C0A16; padding:clamp(60px,10vw,100px) 22px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:#FCEEF3; background:#1C0A16; padding:5px 10px; border-radius:2px;">PASSO 2</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:#A8457A;">OPCIONAL · SÓ NESTA PÁGINA</span>
+      </div>
+      <div data-split="1" style="display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(28px,5vw,56px); align-items:start;">
+        <div>
+          <h2 style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(28px,5.6vw,44px); line-height:1.06; margin:0 0 18px;">Despertar Kundalínico | <em style="color:#A8457A;">3ª Edição em formato de aulas</em></h2>
+          <p style="font-size:clamp(16px,3.8vw,18px); line-height:1.62; color:rgba(28,10,22,.82); margin:0;">Você terá acesso às gravações e aos materiais do Workshop após o evento ao vivo, para estudar com calma e revisar o conteúdo. Serão 8 horas de aprendizado prático e aplicável.</p>
+          <div style="display:flex; flex-direction:column; gap:12px; margin-top:26px;">
+            <sc-for list="{{ deliverables }}" as="d" hint-placeholder-count="4">
+              <div style="display:flex; align-items:flex-start; gap:14px; padding:14px 16px; background:#FFFFFF; border:1px solid rgba(168,69,122,.18); border-radius:3px;">
+                <span aria-hidden="true" style="flex-shrink:0; display:flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:50%; background:#1C0A16; color:#F6A9CB; margin-top:1px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+                <span style="font-size:clamp(15.5px,3.7vw,17px); line-height:1.5; color:#1C0A16;">{{ d.t }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="position:sticky; top:24px; background:#1C0A16; color:#FCEEF3; border-radius:4px; overflow:hidden; box-shadow:0 30px 60px rgba(28,10,22,.25);">
+          <div style="aspect-ratio:16/10; overflow:hidden; position:relative;">
+            <img src="./assets/psique-eros.webp" alt="" loading="lazy" decoding="async" style="display:block; width:100%; height:100%; object-fit:cover; object-position:center 32%;">
+            <div aria-hidden="true" style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,10,22,0) 40%, #1C0A16 100%);"></div>
+            <span style="position:absolute; left:18px; bottom:14px; display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#FCEEF3;"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg>8 HORAS EM AULAS</span>
+          </div>
+          <div style="padding:clamp(22px,4vw,30px);">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:rgba(252,238,243,.6); margin-bottom:8px;">ACESSO ÀS GRAVAÇÕES</div>
+            <div style="display:flex; align-items:baseline; gap:8px; margin-bottom:6px;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:rgba(252,238,243,.7);">12x de</span>
+              <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(46px,9vw,58px); line-height:.9; color:#F6A9CB;">R$ 20,37</span>
+            </div>
+            <p style="font-size:14.5px; line-height:1.5; color:rgba(252,238,243,.72); margin:12px 0 22px;">O valor investido no acesso às gravações retorna como cashback.</p>
+            <a href="{{ recordingUrl }}" target="_blank" rel="noopener" class="ty-cta" style="display:flex; align-items:center; justify-content:center; gap:10px; padding:18px 20px; border-radius:2px; background:#F6A9CB; color:#1C0A16; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:12.5px; letter-spacing:.12em; text-decoration:none; box-shadow:0 12px 30px rgba(246,169,203,.3);">QUERO AS GRAVAÇÕES →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer style="padding:clamp(48px,8vw,72px) 22px 34px; text-align:center;">
+    <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-style:italic; font-size:clamp(26px,6vw,38px); color:#F6A9CB; margin-bottom:22px;">Seja leve, seja livre.</div>
+    <div style="font-size:12.5px; line-height:1.5; color:rgba(252,238,243,.42);">Copyright ©2026 Escola de Energias 5D — Ramon Neto. Todos os direitos reservados.</div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;groupUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://chat.whatsapp.com/JOAU7RixyS8GIXPinMzxQl&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;recordingUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://pay.kiwify.com.br/caGLUQO&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Links&quot;},&quot;eventDate&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;07 &amp; 08/11&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ingresso&quot;},&quot;eventTime&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;9h às 16h&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Ingresso&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      groupUrl: this.props.groupUrl ?? 'https://chat.whatsapp.com/JOAU7RixyS8GIXPinMzxQl',
+      recordingUrl: this.props.recordingUrl ?? 'https://pay.kiwify.com.br/caGLUQO',
+      eventDate: this.props.eventDate ?? '07 & 08/11',
+      eventTime: this.props.eventTime ?? '9h às 16h',
+      deliverables: [
+        { t: 'Acesso às gravações da imersão editadas em formato de aulas.' },
+        { t: 'Conteúdo liberado em até 7 dias após o evento.' },
+        { t: 'Acesso disponível para SEMPRE.' },
+        { t: 'O valor investido no acesso às gravações retorna como cashback.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

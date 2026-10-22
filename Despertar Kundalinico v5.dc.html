@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/otf" href="./assets/fonts/Atelier-Fleur-Bold.otf" crossorigin="">
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="preconnect" href="https://cdn.utmify.com.br">
+<style>
+  @font-face { font-family:'Atelier Fleur'; src:url('./assets/fonts/Atelier-Fleur-Bold.otf') format('opentype'); font-weight:400; font-style:normal; font-display:swap; }
+  @font-face { font-family:'Atelier Fleur'; src:url('./assets/fonts/Atelier-Fleur-Italic.otf') format('opentype'); font-weight:400; font-style:italic; font-display:swap; }
+  noscript { display:none !important; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#F4ECE0; }
+  *, *::before, *::after { box-sizing:border-box; }
+  a { color:#8C2F55; }
+  a:hover { color:#6E2142; }
+  @keyframes lIn { from { transform:translateY(16px); opacity:.001 } to { transform:none; opacity:1 } }
+  @keyframes lBreath { 0%,100% { opacity:.55; transform:scale(1) } 50% { opacity:1; transform:scale(1.06) } }
+  [data-h] { animation:lIn .8s cubic-bezier(.2,.8,.3,1) both; }
+  [data-h="2"] { animation-delay:.08s } [data-h="3"] { animation-delay:.16s } [data-h="4"] { animation-delay:.26s }
+  [data-rv] { opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.2,.8,.3,1), transform .8s cubic-bezier(.2,.8,.3,1); }
+  [data-rv].in { opacity:1; transform:none; }
+  [data-stag] > * { opacity:0; transform:translateY(18px); transition:opacity .7s cubic-bezier(.2,.8,.3,1), transform .7s cubic-bezier(.2,.8,.3,1); }
+  [data-stag].in > * { opacity:1; transform:none; }
+  [data-stag].in > *:nth-child(2) { transition-delay:.08s } [data-stag].in > *:nth-child(3) { transition-delay:.16s }
+  [data-stag].in > *:nth-child(4) { transition-delay:.24s } [data-stag].in > *:nth-child(5) { transition-delay:.32s } [data-stag].in > *:nth-child(6) { transition-delay:.4s }
+  .l-cta { transition:transform .2s ease, box-shadow .3s ease, background .3s ease; }
+  .l-cta:hover { background:#7A2549 !important; box-shadow:0 16px 34px rgba(140,47,85,.32) !important; transform:translateY(-1px); }
+  .l-cta:active { transform:scale(.985); }
+  @media (max-width:900px) {
+    [data-2c] { grid-template-columns:1fr !important; }
+    [data-3c] { grid-template-columns:1fr !important; }
+    [data-2c-keep] { grid-template-columns:1fr 1fr !important; }
+    [data-hero-ticket] { justify-self:stretch !important; max-width:none !important; }
+    [data-bio-photo] { order:-1; max-width:340px !important; justify-self:center; }
+    [data-sticky] { display:block !important; }
+    [data-last] { padding-bottom:110px !important; }
+    [data-topbar-sep] { display:none !important; }
+  }
+  @media (max-width:520px) {
+    [data-2c-keep] { grid-template-columns:1fr !important; }
+    [data-tk-grid] > div { padding-left:6px !important; padding-right:6px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-h],[data-rv],[data-stag] > * { opacity:1 !important; transform:none !important; animation:none !important; transition:none !important; }
+  }
+</style>
+</helmet>
+<div style="position:relative; background:#F4ECE0; color:#2A1A20; font-family:'Hanken Grotesk',system-ui,sans-serif; overflow-x:hidden;">
+  <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1610885263941626&amp;ev=PageView&amp;noscript=1"></noscript>
+
+  <!-- ============ FAIXA TOPO ============ -->
+  <div style="background:#2A1220; color:#F7EEE6;">
+    <div style="max-width:1200px; margin:0 auto; padding:10px 20px; display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:clamp(10px,2.6vw,11.5px); letter-spacing:.14em;">
+      <span>07 E 08 DE NOVEMBRO · AO VIVO NO ZOOM</span>
+      <span data-topbar-sep="1" aria-hidden="true" style="opacity:.4;">|</span>
+      <span style="color:#F2B6CC;">INGRESSO R$19,90</span>
+    </div>
+  </div>
+
+  <!-- ============ 1 · HERO ============ -->
+  <section id="topo" data-screen-label="Hero" style="position:relative; overflow:hidden; background:radial-gradient(900px 620px at 88% 18%, rgba(233,167,194,.38), transparent 62%), radial-gradient(760px 560px at 0% 100%, rgba(212,178,120,.22), transparent 60%), #F4ECE0;">
+    <div aria-hidden="true" style="position:absolute; right:-140px; top:40px; width:520px; height:520px; border-radius:50%; border:1px solid rgba(140,47,85,.14);"></div>
+    <div aria-hidden="true" style="position:absolute; right:-80px; top:100px; width:400px; height:400px; border-radius:50%; border:1px solid rgba(140,47,85,.10);"></div>
+    <div data-2c="1" style="position:relative; max-width:1200px; margin:0 auto; padding:clamp(48px,7vw,96px) 22px clamp(64px,8vw,110px); display:grid; grid-template-columns:1.12fr .88fr; gap:clamp(36px,5vw,72px); align-items:center;">
+      <div>
+        <div data-h="1" style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em; color:#9A7334; margin-bottom:clamp(18px,3vw,26px);">IMERSÃO RESGATE DE FRACTAIS | DESPERTAR KUNDALÍNICO</div>
+        <p data-h="1" style="font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(20px,4.4vw,26px); line-height:1.35; color:#8C2F55; margin:0 0 clamp(16px,2.6vw,22px); max-width:30ch;">Você construiu tudo o que tem. E o prazer de viver isso, onde ficou?</p>
+        <h1 data-h="2" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(34px,5.6vw,66px); line-height:1.04; letter-spacing:-.015em; margin:0 0 clamp(22px,3.4vw,30px); color:#2A1A20; text-wrap:balance;">Saia do fim de semana com a cabeça desligada do trabalho e <em style="font-style:italic; color:#8C2F55;">o prazer de volta no corpo.</em></h1>
+        <p data-h="3" style="font-size:clamp(16.5px,3.9vw,19px); line-height:1.62; color:rgba(42,26,32,.78); margin:0; max-width:54ch; text-wrap:pretty;">Mesmo que você já tenha tentado descanso, terapia, curso e estratégia nova e continue acordando cansada. <strong style="font-weight:600; color:#2A1A20;">Aqui você não estuda nada.</strong> São duas práticas da Kundalini Rúnica ao vivo, uma por dia. Você deita, escuta e acompanha.</p>
+      </div>
+
+      <!-- TICKET -->
+      <div data-h="4" data-hero-ticket="1" style="justify-self:end; width:100%; max-width:430px;">
+        <div style="filter:drop-shadow(0 28px 42px rgba(42,18,32,.24)); transform:rotate(-1.2deg);">
+          <div style="border-radius:14px 14px 0 0; overflow:hidden; -webkit-mask-image:radial-gradient(circle 15px at 0 100%, transparent 15px, #000 15.5px), radial-gradient(circle 15px at 100% 100%, transparent 15px, #000 15.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 15px at 0 100%, transparent 15px, #000 15.5px), radial-gradient(circle 15px at 100% 100%, transparent 15px, #000 15.5px); mask-composite:intersect; background:#2A1220; color:#F7EEE6; position:relative;">
+            <div aria-hidden="true" style="position:absolute; inset:10px 10px 0; border:1px solid rgba(212,178,120,.35); border-bottom:0; border-radius:8px 8px 0 0; pointer-events:none;"></div>
+            <div style="position:relative; padding:24px 28px 0; display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.2em; color:#D4B278;">ADMITE 1 · AO VIVO</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:rgba(247,238,230,.5);">Nº 0711-RF</span>
+            </div>
+            <div style="position:relative; padding:18px 28px 20px; text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.22em; color:#F2B6CC; margin-bottom:10px;">IMERSÃO</div>
+              <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(28px,3.4vw,34px); line-height:1.02;">Resgate de Fractais</div>
+              <div style="font-family:'Instrument Serif',serif; font-style:italic; font-size:20px; color:#F2B6CC; margin-top:4px;">Despertar Kundalínico</div>
+            </div>
+            <div data-tk-grid="1" style="position:relative; display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid rgba(247,238,230,.14); margin:0 10px;">
+              <div style="padding:16px 12px 22px; text-align:center; border-right:1px solid rgba(247,238,230,.14);"><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; color:#D4B278; margin-bottom:7px;">DATAS</div><div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:21px; line-height:1;">07 e 08</div><div style="font-size:12px; opacity:.7; margin-top:4px;">sáb e dom · nov</div></div>
+              <div style="padding:16px 12px 22px; text-align:center; border-right:1px solid rgba(247,238,230,.14);"><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; color:#D4B278; margin-bottom:7px;">HORÁRIO</div><div style="font-size:13.5px; line-height:1.4;">9h às 12h<br>14h às 16h</div></div>
+              <div style="padding:16px 12px 22px; text-align:center;"><div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.18em; color:#D4B278; margin-bottom:7px;">LOCAL</div><div style="font-size:13.5px; line-height:1.4;">Ao vivo no Zoom</div><div style="font-size:12px; opacity:.7; margin-top:2px;">com Hamad Sedulus</div></div>
+            </div>
+          </div>
+          <div style="border-radius:0 0 14px 14px; overflow:hidden; -webkit-mask-image:radial-gradient(circle 15px at 0 0, transparent 15px, #000 15.5px), radial-gradient(circle 15px at 100% 0, transparent 15px, #000 15.5px); -webkit-mask-composite:source-in; mask-image:radial-gradient(circle 15px at 0 0, transparent 15px, #000 15.5px), radial-gradient(circle 15px at 100% 0, transparent 15px, #000 15.5px); mask-composite:intersect; background:#FBF6EF; position:relative;">
+            <div style="padding:0 22px;"><div style="border-top:2px dashed rgba(140,47,85,.4);"></div></div>
+            <div style="display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; padding:20px 26px 22px;">
+              <div>
+                <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; color:#9A7334; margin-bottom:4px;">VALOR DO INGRESSO</div>
+                <div style="display:flex; align-items:flex-start; gap:3px; color:#2A1A20;">
+                  <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:26px; line-height:1; margin-top:12px;">R$</span>
+                  <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:92px; line-height:.82; letter-spacing:-.03em;">19</span>
+                  <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:38px; line-height:1; margin-top:6px;">,90</span>
+                </div>
+              </div>
+              <div aria-hidden="true" style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                <div style="display:flex; height:64px; gap:0;"><span style="width:2px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:3px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:3px; background:transparent;"></span><span style="width:2px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:3px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:2px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:3px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:3px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:3px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:2px; background:#2A1A20;"></span><span style="width:3px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:2px; background:transparent;"></span><span style="width:1px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:2px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:3px; background:#2A1A20;"></span><span style="width:1px; background:transparent;"></span><span style="width:2px; background:#2A1A20;"></span></div>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.2em; color:rgba(42,26,32,.55);">RF·DK·2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="{{ checkoutUrl }}" class="l-cta" style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:26px; padding:20px 18px; border-radius:10px; background:#8C2F55; color:#FBF3EC; font-weight:600; font-size:15.5px; letter-spacing:.02em; text-decoration:none; text-align:center; box-shadow:0 12px 26px rgba(140,47,85,.28);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Garantir meu ingresso por R$19,90</a>
+        <p style="display:flex; gap:9px; align-items:flex-start; font-size:13.5px; line-height:1.5; color:rgba(42,26,32,.66); margin:14px 2px 0;"><svg viewBox="0 0 24 24" fill="none" stroke="#9A7334" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" style="flex-shrink:0; margin-top:2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Participa do sábado. Se no fim do dia você não sentir nada no corpo, pede o reembolso e eu devolvo tudo.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 · POR QUE ============ -->
+  <section data-screen-label="Por que" style="background:#FBF6EF; border-top:1px solid rgba(42,26,32,.08);">
+    <div data-2c="1" style="max-width:1160px; margin:0 auto; padding:clamp(72px,10vw,128px) 22px; display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(36px,5vw,76px); align-items:start;">
+      <div>
+        <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; letter-spacing:-.01em; margin:0 0 clamp(26px,4vw,38px); color:#2A1A20; text-wrap:balance;">Em que momento você virou <em style="font-style:italic; color:#8C2F55;">a pessoa que resolve?</em></h2>
+        <div data-stag="1" style="display:flex; flex-direction:column; gap:20px;">
+          <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;"><strong style="font-weight:600; color:#2A1A20;">Não foi falta de força de vontade.</strong> Você tentou estratégia nova, curso, terapia e fim de semana inteiro de descanso. Nada devolveu a tua energia, porque tudo isso pede mais da mesma cabeça. Eu chamo isso de solução mental. Todo mundo te indica, e ela só te dá mais coisa pra pensar.</p>
+          <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">O teu cansaço vem da cabeça que continua no trabalho depois que o dia acaba. Você deita no sábado e já tá resolvendo a segunda. Com a mente ligada, o corpo não repõe energia, nem dormindo. <span style="font-family:'Instrument Serif',serif; font-style:italic; font-size:1.18em; color:#8C2F55;">É um carro que passa a noite ligado na garagem e amanhece com o tanque vazio.</span> A energia que move disposição, desejo e criação fica na base do corpo e se chama kundalini. Em você ela tá parada, com a cabeça de vigia sem largar o turno. O método que tira a mente do comando e faz essa energia circular de novo se chama <strong style="font-weight:600; color:#2A1A20;">Kundalini Rúnica.</strong></p>
+          <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">Por isso dois dias dão conta. Cada dia tem uma prática rúnica de duas horas. Você deita, escuta e acompanha. No sábado a cabeça sai do comando. No domingo a energia volta a circular. <strong style="font-weight:600; color:#2A1A20;">Você vai saber se funcionou ainda no sábado,</strong> quando a prática terminar e você sentir o corpo.</p>
+        </div>
+      </div>
+      <div data-rv="1" style="position:sticky; top:40px;">
+        <div style="position:relative; border-radius:200px 200px 14px 14px; overflow:hidden; aspect-ratio:4/5; background:#2A1220; box-shadow:0 30px 60px rgba(42,18,32,.22);">
+          <img src="./assets/kundalini-ascensao.webp" alt="Energia subindo pela coluna" loading="lazy" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div data-2c-keep="1" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+          <div style="padding:16px 18px; border-radius:12px; background:#F4ECE0; border:1px solid rgba(42,26,32,.08);">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9A7334; margin-bottom:6px;">SÁBADO</div>
+            <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:21px; line-height:1.15;">A cabeça sai do comando</div>
+          </div>
+          <div style="padding:16px 18px; border-radius:12px; background:#F4ECE0; border:1px solid rgba(42,26,32,.08);">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:#9A7334; margin-bottom:6px;">DOMINGO</div>
+            <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:21px; line-height:1.15;">A energia volta a circular</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3 · PARA QUEM É ============ -->
+  <section data-screen-label="Para quem é" style="background:#F4ECE0;">
+    <div style="max-width:1160px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px;">
+      <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; margin:0 0 clamp(30px,4.6vw,48px); color:#2A1A20;">Essa imersão é pra você se</h2>
+      <div data-3c="1" data-stag="1" style="display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,1.8vw,18px);">
+        <sc-for list="{{ forWho }}" as="f" hint-placeholder-count="6">
+          <div style="display:flex; gap:14px; align-items:flex-start; padding:clamp(20px,3vw,26px); border-radius:14px; background:#FBF6EF; border:1px solid rgba(42,26,32,.08);">
+            <span aria-hidden="true" style="flex-shrink:0; width:30px; height:30px; border-radius:50%; background:rgba(140,47,85,.1); color:#8C2F55; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <p style="font-size:clamp(16px,3.8vw,17.5px); line-height:1.55; color:#2A1A20; margin:0;">{{ f.t }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div data-rv="1" style="margin-top:clamp(18px,3vw,26px); display:flex; gap:16px; align-items:flex-start; padding:clamp(22px,3.4vw,30px); border-radius:14px; border:1px dashed rgba(42,26,32,.26);">
+        <span aria-hidden="true" style="flex-shrink:0; width:30px; height:30px; border-radius:50%; border:1px solid rgba(42,26,32,.3); color:rgba(42,26,32,.6); display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg></span>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:rgba(42,26,32,.55); margin-bottom:8px;">PARA QUEM NÃO É</div>
+          <p style="font-size:clamp(16px,3.8vw,17.5px); line-height:1.62; color:rgba(42,26,32,.78); margin:0;">Não é pra você se procura mais um conteúdo pra anotar e estudar depois. Também não é se espera que eu faça por você. Eu entrego a ferramenta, e quem deita e acompanha é você.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4 · MATERIAIS ============ -->
+  <section data-screen-label="Materiais" style="background:#FBF6EF; border-top:1px solid rgba(42,26,32,.08);">
+    <div style="max-width:1160px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px;">
+      <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; margin:0 0 clamp(30px,4.6vw,48px); color:#2A1A20;">O que o teu ingresso <em style="font-style:italic; color:#8C2F55;">entrega</em></h2>
+      <div data-2c="1" data-stag="1" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2vw,20px);">
+        <sc-for list="{{ materials }}" as="m" hint-placeholder-count="4">
+          <div style="display:flex; flex-direction:column; padding:clamp(24px,3.6vw,32px); border-radius:16px; background:#F4ECE0; border:1px solid rgba(42,26,32,.08);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+              <span aria-hidden="true" style="width:46px; height:46px; border-radius:12px; background:#2A1220; color:#F2B6CC; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ m.icon }}"></path></svg></span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; color:#9A7334;">{{ m.n }}</span>
+            </div>
+            <h3 style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(23px,3.4vw,28px); line-height:1.1; margin:0 0 10px; color:#2A1A20;">{{ m.title }}</h3>
+            <p style="font-size:16px; line-height:1.62; color:rgba(42,26,32,.76); margin:0;">{{ m.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div data-rv="1" style="margin-top:clamp(18px,3vw,26px); padding:clamp(22px,3.4vw,30px); border-radius:16px; background:#2A1220; color:#F7EEE6;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:#F2B6CC; margin-bottom:14px;">BÔNUS</div>
+        <div data-2c="1" style="display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;">
+          <div style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#D4B278;">+</span><span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(21px,3vw,24px); line-height:1.2;">Workshop Chama Gêmea.</span></div>
+          <div style="display:flex; gap:12px; align-items:baseline;"><span aria-hidden="true" style="color:#D4B278;">+</span><span style="font-size:16.5px; line-height:1.5;"><span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(21px,3vw,24px);">10 Portais.</span> Um áudio por dia pra limpar o que você absorve dos outros.</span></div>
+        </div>
+      </div>
+      <p data-rv="1" style="font-size:14.5px; line-height:1.55; color:rgba(42,26,32,.6); margin:18px 0 0;">O ingresso vale pra participação ao vivo. A gravação em formato de aulas não está incluída.</p>
+    </div>
+  </section>
+
+  <!-- ============ 5 · PROGRAMAÇÃO ============ -->
+  <section data-screen-label="Programação" style="background:#F4ECE0;">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px;">
+      <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; margin:0 0 clamp(30px,4.6vw,48px); color:#2A1A20;">O que a gente vai fazer <em style="font-style:italic; color:#8C2F55;">em cada dia</em></h2>
+      <div data-2c="1" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.4vw,26px); align-items:stretch;">
+        <sc-for list="{{ days }}" as="d" hint-placeholder-count="2">
+          <div data-rv="1" style="display:flex; flex-direction:column; border-radius:18px; overflow:hidden; background:#FBF6EF; border:1px solid rgba(42,26,32,.08); box-shadow:0 18px 40px rgba(42,18,32,.06);">
+            <div style="display:flex; align-items:flex-end; gap:18px; padding:clamp(22px,3.4vw,30px); background:{{ d.headBg }}; color:#F7EEE6;">
+              <span style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(64px,8vw,96px); line-height:.8; color:#F2B6CC;">{{ d.num }}</span>
+              <div style="padding-bottom:4px;">
+                <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:#D4B278; margin-bottom:8px;">{{ d.label }}</div>
+                <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(20px,2.6vw,26px); line-height:1.15;">{{ d.title }}</div>
+              </div>
+            </div>
+            <div style="padding:clamp(22px,3.4vw,30px); display:flex; flex-direction:column; gap:22px; flex:1;">
+              <div>
+                <div style="display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8C2F55; padding:5px 10px; border-radius:999px; background:rgba(140,47,85,.09); margin-bottom:14px;">MANHÃ, 9H ÀS 12H</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <sc-for list="{{ d.morning }}" as="x" hint-placeholder-count="3">
+                    <div style="display:flex; gap:12px; align-items:flex-start;"><span aria-hidden="true" style="flex-shrink:0; width:6px; height:6px; border-radius:50%; background:#9A7334; margin-top:10px;"></span><p style="font-size:16px; line-height:1.6; color:rgba(42,26,32,.8); margin:0;">{{ x.t }}</p></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="padding-top:20px; border-top:1px solid rgba(42,26,32,.1);">
+                <div style="display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#8C2F55; padding:5px 10px; border-radius:999px; background:rgba(140,47,85,.09); margin-bottom:14px;">TARDE, 14H ÀS 16H</div>
+                <p style="font-size:16px; line-height:1.62; color:rgba(42,26,32,.82); margin:0;">{{ d.afternoon }}</p>
+                <sc-if value="{{ d.hasExtra }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:16px; line-height:1.62; color:rgba(42,26,32,.82); margin:10px 0 0;">{{ d.extra }}</p>
+                </sc-if>
+              </div>
+              <div style="margin-top:auto; padding:18px 20px; border-radius:12px; background:#F2D9E3;">
+                <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; color:#8C2F55; margin-bottom:8px;">{{ d.endLabel }}</div>
+                <p style="font-family:'Instrument Serif',serif; font-size:clamp(19px,2.4vw,21px); line-height:1.32; color:#2A1A20; margin:0;">{{ d.end }}</p>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6 · AO VIVO ============ -->
+  <section data-screen-label="Ao vivo" style="background:#FBF6EF; border-top:1px solid rgba(42,26,32,.08);">
+    <div data-2c="1" style="max-width:1160px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px; display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(36px,5vw,72px); align-items:start;">
+      <div data-rv="1">
+        <h2 style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; margin:0 0 clamp(24px,3.6vw,34px); color:#2A1A20;">O que vai acontecer <em style="font-style:italic; color:#8C2F55;">ao vivo</em></h2>
+        <div style="position:relative; padding:clamp(24px,3.6vw,32px); border-radius:16px; background:#2A1220; color:#F7EEE6;">
+          <span aria-hidden="true" style="position:absolute; top:-18px; left:24px; font-family:'Instrument Serif',serif; font-size:84px; line-height:1; color:#F2B6CC;">"</span>
+          <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(20px,2.8vw,24px); line-height:1.38; color:#F2B6CC; margin:10px 0 14px;">Mas Hamad, eu não consigo parar de pensar nem quando medito.</p>
+          <p style="font-size:16.5px; line-height:1.62; margin:0; color:rgba(247,238,230,.88);">Você não precisa parar de pensar. Você deita e acompanha. Quem ocupa o teu corpo é a prática.</p>
+        </div>
+      </div>
+      <div data-stag="1" style="display:flex; flex-direction:column;">
+        <sc-for list="{{ live }}" as="l" hint-placeholder-count="5">
+          <div style="display:grid; grid-template-columns:52px 1fr; gap:16px; padding:22px 0; border-bottom:1px solid rgba(42,26,32,.1);">
+            <span aria-hidden="true" style="width:44px; height:44px; border-radius:50%; border:1px solid rgba(154,115,52,.45); color:#8C2F55; display:flex; align-items:center; justify-content:center;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="{{ l.icon }}"></path></svg></span>
+            <p style="font-size:clamp(16px,3.8vw,17.5px); line-height:1.6; color:rgba(42,26,32,.8); margin:0; padding-top:9px;"><strong style="font-weight:600; color:#2A1A20;">{{ l.lead }}</strong>{{ l.rest }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7 · PREÇO ============ -->
+  <section data-screen-label="Preço" style="position:relative; overflow:hidden; background:#2A1220; color:#F7EEE6;">
+    <div aria-hidden="true" style="position:absolute; left:50%; top:50%; width:760px; height:760px; margin:-380px 0 0 -380px; border-radius:50%; background:radial-gradient(circle, rgba(242,182,204,.16), transparent 65%); animation:lBreath 8s ease-in-out infinite;"></div>
+    <div style="position:relative; max-width:1100px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px;">
+      <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(30px,4.8vw,52px); line-height:1.08; margin:0 auto clamp(34px,5vw,56px); max-width:22ch; text-align:center; text-wrap:balance;">Por que o ingresso custa R$19,90 e <em style="font-style:italic; color:#F2B6CC;">por que não é de graça</em></h2>
+      <div data-rv="1" data-2c-keep="1" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:760px; margin:0 auto clamp(36px,5vw,56px);">
+        <div style="padding:clamp(22px,3.4vw,30px); border-radius:16px; border:1px solid rgba(247,238,230,.16); text-align:center;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:rgba(247,238,230,.55); margin-bottom:12px;">SESSÃO INDIVIDUAL</div>
+          <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(40px,6vw,60px); line-height:1; color:rgba(247,238,230,.55);"><span style="font-size:.5em;">a partir de </span>R$500</div>
+        </div>
+        <div style="padding:clamp(22px,3.4vw,30px); border-radius:16px; background:#FBF6EF; color:#2A1A20; text-align:center; box-shadow:0 0 0 4px rgba(242,182,204,.25);">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:#8C2F55; margin-bottom:12px;">IMERSÃO EM GRUPO · 2 DIAS</div>
+          <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(52px,8vw,84px); line-height:.9; letter-spacing:-.02em;">R$19<span style="font-size:.5em;">,90</span></div>
+        </div>
+      </div>
+      <div data-stag="1" data-2c="1" style="display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,40px); max-width:980px; margin:0 auto;">
+        <p style="font-size:clamp(16.5px,3.9vw,18px); line-height:1.72; color:rgba(247,238,230,.84); margin:0;">O ingresso custa dezenove reais e noventa centavos. A sessão individual comigo começa em R$500, e a minha agenda não comporta todo mundo que procura. O formato em grupo existe por isso, e é ele que permite esse preço. <strong style="font-weight:600; color:#FBF3EC;">Eu quero você na prática, nos dois dias, e o preço não pode ser o motivo de você ficar de fora.</strong></p>
+        <p style="font-size:clamp(16.5px,3.9vw,18px); line-height:1.72; color:rgba(247,238,230,.84); margin:0;">E por que eu cobro? Porque evento gratuito enche de gente que se inscreve e não aparece. Essa prática depende de você estar lá, com o corpo, no sábado e no domingo. <strong style="font-weight:600; color:#FBF3EC;">Quem paga aparece.</strong> O valor marca o teu lugar e a tua presença.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8 · QUEM CONDUZ ============ -->
+  <section data-screen-label="Quem conduz" style="background:#F4ECE0;">
+    <div data-2c="1" style="max-width:1120px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px; display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(36px,5vw,72px); align-items:center;">
+      <div data-rv="1" data-bio-photo="1" style="position:relative; width:100%; max-width:430px;">
+        <div aria-hidden="true" style="position:absolute; inset:18px -18px -18px 18px; border-radius:14px; border:1px solid rgba(140,47,85,.3);"></div>
+        <div style="position:relative; border-radius:14px; overflow:hidden; box-shadow:0 28px 56px rgba(42,18,32,.2);">
+          <img src="./assets/hamad-bio.webp" alt="Hamad Sedulus" loading="lazy" decoding="async" style="display:block; width:100%;">
+        </div>
+      </div>
+      <div>
+        <h2 data-rv="1" style="font-family:'Atelier Fleur','Instrument Serif',serif; font-weight:400; font-size:clamp(32px,5vw,54px); line-height:1.06; margin:0 0 clamp(24px,3.6vw,32px); color:#2A1A20;">Quem vai conduzir</h2>
+        <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+          <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">Eu sou o Hamad Sedulus. Vim do subúrbio, larguei a escola no fundamental e trabalhei dez anos como peão de obra. Me chamaram de burro. Quando passei por uma crise de kundalini, me chamaram de louco. <strong style="font-weight:600; color:#2A1A20;">Eu sei o que é sentir uma coisa no corpo e ouvir que é coisa da tua cabeça.</strong></p>
+          <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">Hoje eu atendo doutora em psicologia e milionário, e a minha agenda individual não comporta quem me procura. Por isso montei essa imersão em grupo, pra te entregar a Kundalini Rúnica em dois dias.</p>
+          <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(21px,3vw,26px); line-height:1.36; color:#8C2F55; margin:4px 0 0;">Você não precisa de mim. Precisa da ferramenta, e é ela que eu vou pôr na tua mão.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9 · FECHAMENTO ============ -->
+  <section data-screen-label="Fechamento" data-last="1" style="background:radial-gradient(800px 560px at 50% 100%, rgba(233,167,194,.36), transparent 64%), #FBF6EF; border-top:1px solid rgba(42,26,32,.08);">
+    <div data-2c="1" style="max-width:1160px; margin:0 auto; padding:clamp(72px,10vw,124px) 22px; display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(36px,5vw,72px); align-items:center;">
+      <div data-stag="1" style="display:flex; flex-direction:column; gap:18px;">
+        <p style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(28px,4.2vw,44px); line-height:1.1; color:#2A1A20; margin:0 0 6px; text-wrap:balance;">Você quer voltar a ter prazer na vida <em style="font-style:italic; color:#8C2F55;">sem abrir mão do que construiu.</em></p>
+        <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">Em dois dias você faz duas práticas da Kundalini Rúnica comigo, ao vivo. No sábado a cabeça sai do comando. No domingo a energia volta a circular. Você sai com o Mapa do Cansaço preenchido, o antes e o depois da tua energia anotados e um protocolo de três minutos pra segunda-feira.</p>
+        <p style="font-size:clamp(16.5px,3.9vw,18.5px); line-height:1.72; color:rgba(42,26,32,.8); margin:0;">Na segunda o trabalho é o mesmo e a casa é a mesma. <strong style="font-weight:600; color:#2A1A20;">Quem volta é você, com nome e com corpo.</strong></p>
+        <p style="font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(21px,3vw,26px); line-height:1.36; color:#8C2F55; margin:4px 0 0;">Você não precisa decidir a vida inteira hoje. Decide só o próximo passo.</p>
+      </div>
+      <div data-rv="1" style="width:100%; max-width:440px; justify-self:center; padding:clamp(26px,4vw,34px); border-radius:18px; background:#2A1220; color:#F7EEE6; box-shadow:0 30px 60px rgba(42,18,32,.25);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.14em; color:#F2B6CC; margin-bottom:10px;">IMERSÃO RESGATE DE FRACTAIS | DESPERTAR KUNDALÍNICO</div>
+        <div style="font-size:15px; line-height:1.6; color:rgba(247,238,230,.78); margin-bottom:18px;">Sábado e domingo, 07 e 08 de novembro<br>9h às 12h e 14h às 16h<br>Ao vivo no Zoom</div>
+        <div style="padding:18px 0; border-top:1px dashed rgba(247,238,230,.22); border-bottom:1px dashed rgba(247,238,230,.22); text-align:center; margin-bottom:20px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:#D4B278; margin-bottom:4px;">INGRESSO</div>
+          <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:clamp(68px,10vw,92px); line-height:.9; letter-spacing:-.02em;">R$19<span style="font-size:.45em;">,90</span></div>
+        </div>
+        <a href="{{ checkoutUrl }}" class="l-cta" style="display:flex; align-items:center; justify-content:center; gap:10px; padding:19px 18px; border-radius:10px; background:#F2B6CC; color:#2A1220; font-weight:700; font-size:15px; letter-spacing:.02em; text-decoration:none; text-align:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" style="flex-shrink:0;"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>Garantir meu ingresso por R$19,90</a>
+        <p style="font-size:13.5px; line-height:1.5; color:rgba(247,238,230,.66); margin:14px 2px 0; text-align:center;">Participa do sábado. Se no fim do dia você não sentir nada no corpo, pede o reembolso e eu devolvo tudo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FIXO MOBILE ============ -->
+  <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+    <div data-sticky="1" style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:80; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:rgba(251,246,239,.97); border-top:1px solid rgba(42,26,32,.12); box-shadow:0 -10px 30px rgba(42,18,32,.08); animation:lIn .3s ease-out;">
+      <div style="display:flex; align-items:center; gap:12px; max-width:520px; margin:0 auto;">
+        <div style="flex:1; min-width:0; line-height:1.15;">
+          <div style="font-family:'Atelier Fleur','Instrument Serif',serif; font-size:26px; color:#2A1A20;">R$19,90</div>
+          <div style="font-size:11.5px; color:rgba(42,26,32,.6); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">07 e 08 nov · ao vivo no Zoom</div>
+        </div>
+        <a href="{{ checkoutUrl }}" class="l-cta" style="flex-shrink:0; padding:15px 20px; border-radius:10px; background:#8C2F55; color:#FBF3EC; font-weight:600; font-size:13.5px; text-decoration:none;">Garantir ingresso</a>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;checkoutUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://pay.kiwify.com.br/YUdGRJ6&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Oferta&quot;}}">
+class Component extends DCLogic {
+  state = { pastHero: false };
+
+  _initTracking() {
+    if (window.__dkTracking) return;
+    window.__dkTracking = true;
+    const add = (src, attrs) => {
+      const s = document.createElement('script');
+      s.async = true; s.src = src;
+      if (attrs) Object.keys(attrs).forEach((k) => s.setAttribute(k, attrs[k]));
+      document.head.appendChild(s);
+    };
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+      t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+    })(window, document, 'clarity', 'script', 'yjcgsoo4qe');
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init', '1610885263941626');
+    window.fbq('track', 'PageView');
+    window.pixelId = '6a53fb5da118cdce97897176';
+    add('https://cdn.utmify.com.br/scripts/pixel/pixel.js', { defer: '' });
+    add('https://cdn.utmify.com.br/scripts/utms/latest.js', { defer: '', 'data-utmify-prevent-xcod-sck': '', 'data-utmify-prevent-subids': '' });
+  }
+
+  componentDidMount() {
+    this._initTracking();
+    this._onScroll = () => {
+      const hero = document.querySelector('#topo');
+      const past = hero ? window.scrollY > hero.offsetTop + hero.offsetHeight - 60 : window.scrollY > 600;
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+    const targets = document.querySelectorAll('[data-rv], [data-stag]');
+    if ('IntersectionObserver' in window) {
+      this._io = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); this._io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+      targets.forEach((el) => this._io.observe(el));
+      this._safety = setTimeout(() => document.querySelectorAll('[data-rv], [data-stag]').forEach((el) => el.classList.add('in')), 5000);
+    } else targets.forEach((el) => el.classList.add('in'));
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+    if (this._safety) clearTimeout(this._safety);
+  }
+
+  renderVals() {
+    return {
+      checkoutUrl: this.props.checkoutUrl ?? 'https://pay.kiwify.com.br/YUdGRJ6',
+      showSticky: this.state.pastHero,
+      forWho: [
+        { t: 'Você dá conta de tudo e não sobra nada pra você.' },
+        { t: 'Você descansa o fim de semana inteiro e volta cansada na segunda.' },
+        { t: 'O desejo sumiu e você chamou isso de cansaço.' },
+        { t: 'Você sustenta a casa, ou boa parte dela, e trabalhar menos não é uma saída que você aceita.' },
+        { t: 'Você sente muito, intui muito, cuida ou atende gente, e termina o dia vazia.' },
+        { t: 'Você lembra de quando tinha prazer nas coisas e não sabe dizer quando parou.' }
+      ],
+      materials: [
+        { n: '01', icon: 'M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15', title: 'Mapa do Cansaço.', text: 'Uma página. Você preenche comigo no sábado de manhã, em dez minutos, marca em que horas do teu dia a cabeça continua no trabalho e sai com o teu número de energia, de 0 a 10.' },
+        { n: '02', icon: 'M4 3h16v18H4zM12 6v12M12 9l-4-3M12 9l4-3M12 14l-4 4M12 14l4 4', title: 'Cartão das Duas Runas.', text: 'A runa que assenta e a runa que eleva, com o traçado de cada uma. Você usa no sábado à tarde e no domingo à tarde.' },
+        { n: '03', icon: 'M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z', title: 'Roteiro da Noite de Sábado.', text: 'Uma página com o que fazer entre a primeira prática e a manhã de domingo, pra você não devolver o comando pra cabeça na mesma noite.' },
+        { n: '04', icon: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2', title: 'Protocolo de Três Minutos.', text: 'Pra usar já na segunda, na hora exata em que você perceber a cabeça voltando pro trabalho depois do expediente.' }
+      ],
+      days: [
+        { num: '07', label: 'DIA 1 · SÁBADO, 07 DE NOVEMBRO', title: 'O resgate: desligar.', headBg: '#2A1220',
+          morning: [
+            { t: 'Eu te mostro em que horas do teu dia a cabeça continua trabalhando e por que o descanso não repõe.' },
+            { t: 'Você preenche o Mapa do Cansaço comigo e anota o teu número de energia.' },
+            { t: 'Eu apresento a primeira runa e preparo o teu corpo pra prática da tarde.' }
+          ],
+          afternoon: 'Primeira prática da Kundalini Rúnica, com a runa que assenta. Você deita, escuta e acompanha. São duas horas com a cabeça fora do comando.',
+          hasExtra: false, extra: '',
+          endLabel: 'VOCÊ TERMINA O SÁBADO COM',
+          end: 'O Mapa do Cansaço preenchido, o teu número de energia anotado, a primeira prática feita e o Roteiro da Noite de Sábado na mão.' },
+        { num: '08', label: 'DIA 2 · DOMINGO, 08 DE NOVEMBRO', title: 'O despertar: acender.', headBg: '#5A1F3A',
+          morning: [
+            { t: 'A gente abre com o que apareceu na tua noite. Você pergunta e eu respondo ao vivo.' },
+            { t: 'Eu te mostro onde a tua energia ficou parada.' },
+            { t: 'Eu apresento a segunda runa e preparo o corpo pra subida.' }
+          ],
+          afternoon: 'Segunda prática da Kundalini Rúnica, com a runa que eleva. Com a cabeça solta desde sábado, a energia volta a circular.',
+          hasExtra: true, extra: 'Você refaz o teu número de energia e compara com o de sábado.',
+          endLabel: 'VOCÊ TERMINA O DOMINGO COM',
+          end: 'As duas práticas feitas, o antes e o depois anotados e o Protocolo de Três Minutos pra usar na segunda.' }
+      ],
+      live: [
+        { icon: 'M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z', lead: 'Prática conduzida por mim, na hora.', rest: ' Você deita, escuta e acompanha, sem técnica pra decorar e sem lista de tarefa pra depois.' },
+        { icon: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75', lead: 'Campo coletivo.', rest: ' A prática acontece com o grupo junto, num campo que sozinha em casa você não gera.' },
+        { icon: 'M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z', lead: 'Mapa preenchido comigo,', rest: ' durante a manhã de sábado, enquanto eu explico cada parte.' },
+        { icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', lead: 'Perguntas respondidas ao vivo.', rest: ' O que aparecer no sábado você me pergunta no domingo de manhã, antes da segunda prática.' },
+        { icon: 'M3 3v18h18M7 15l4-4 3 3 5-6', lead: 'Antes e depois medido por você.', rest: ' Você anota o teu número no sábado de manhã e refaz no domingo à tarde.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
